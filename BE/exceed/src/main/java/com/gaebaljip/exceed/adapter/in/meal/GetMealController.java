@@ -55,7 +55,7 @@ public class GetMealController {
     private final GetWeightUseCase getWeightUseCase;
 
     /** 오늘 먹은 식사 정보(단,탄,지 및 칼로리) 조회 */
-    @Operation(summary = "오늘 먹은 식사 정보 조회", description = "오늘 먹은 식사 정보(단,탄,지 및 칼로리)를 조회한다.")
+    @Operation(summary = "오늘 먹은 식사 정보 조회 (홈 화면)", description = "오늘 먹은 식사 정보(단,탄,지 및 칼로리)를 조회한다.")
     @GetMapping("/meal")
     @ApiErrorExceptionsExample(GetMealExceptionDocs.class)
     public ApiResponse<ApiResponse.CustomBody<GetMealAndWeightResponse>> getMeal(

@@ -31,7 +31,7 @@ public class DeleteFoodController {
 
     private final DeleteFoodUseCase deleteFoodUseCase;
 
-    @Operation(description = "내가 등록한 음식 삭제하기")
+    @Operation(summary = "내가 등록한 음식 삭제", description = "내가 등록한 음식 삭제하기")
     @DeleteMapping("/food/{foodId}")
     @ApiErrorExceptionsExample(DeleteFoodExceptionDocs.class)
     public ApiResponse<ApiResponse.CustomBody<Void>> deleteFood(

@@ -43,7 +43,7 @@ public class GetAnalysisController {
      * @param memberId
      * @return
      */
-    @Operation(summary = "월별 식사 정보 분석", description = "월별 식사 정보를 분석한다.")
+    @Operation(summary = "월별 식사 정보 분석 (켈린더 분석 화면)", description = "월별 식사 정보를 분석한다.")
     @GetMapping("/achieve/{date}")
     @ApiErrorExceptionsExample(GetAnalysisExceptionDocs.class)
     public ApiResponse<ApiResponse.CustomBody<GetMonthlyAnalysisResponse>> getAnalysis(

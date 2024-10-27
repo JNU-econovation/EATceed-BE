@@ -16,6 +16,7 @@ import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
 import com.gaebaljip.exceed.common.docs.SwaggerTag;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CreateFoodController {
     private final CreateFoodUseCase createFoodUseCase;
 
+    @Operation(summary = "내 음식 추가", description = "내 음식 추가")
     @PostMapping("/food")
     public ApiResponse<CustomBody<Void>> createFood(
             @RequestBody @Valid CreateFoodRequest request, @AuthenticationMemberId Long memberId) {
