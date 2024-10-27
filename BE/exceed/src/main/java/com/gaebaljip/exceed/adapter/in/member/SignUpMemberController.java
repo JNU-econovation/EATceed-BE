@@ -10,6 +10,7 @@ import com.gaebaljip.exceed.application.port.in.member.*;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.member.SignUpMemberExceptionDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/v1")
 @SecurityRequirement(name = "access-token")
-@Tag(name = "[회원가입]")
+@Tag(name = SwaggerTag.SIGN_UP)
 public class SignUpMemberController {
 
     private final ValidateSignUpUsecase validateSignUpUsecase;

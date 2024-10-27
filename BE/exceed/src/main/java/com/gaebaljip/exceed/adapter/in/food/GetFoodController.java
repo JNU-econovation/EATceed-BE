@@ -8,6 +8,7 @@ import com.gaebaljip.exceed.adapter.in.food.response.GetFoodsAutoResponse;
 import com.gaebaljip.exceed.application.port.in.food.GetFoodQuery;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -20,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/v1")
-@Tag(name = "[음식 조회]")
+@Tag(name = SwaggerTag.FOOD)
 public class GetFoodController {
 
     private final GetFoodQuery getFoodQuery;

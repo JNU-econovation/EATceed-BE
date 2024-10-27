@@ -18,6 +18,7 @@ import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.meal.EatMealExceptionDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
@@ -31,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/v1")
 @SecurityRequirement(name = "access-token")
-@Tag(name = "[식사 등록]")
+@Tag(name = SwaggerTag.MEAL)
 public class EatMealController {
 
     private final EatMealUsecase eatMealUsecase;

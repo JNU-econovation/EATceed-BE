@@ -18,6 +18,7 @@ import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.EatCeedStaticMessage;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.auth.LoginExceptionDocs;
 import com.gaebaljip.exceed.common.docs.auth.ReissueTokenExceptionDocs;
 import com.gaebaljip.exceed.common.dto.HttpRequestDTO;
@@ -36,7 +37,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/v1")
 @SecurityRequirement(name = "access-token")
-@Tag(name = "[인증]")
+@Tag(name = SwaggerTag.AUTH)
 public class AuthController {
 
     private final AuthUsecase authUsecase;

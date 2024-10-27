@@ -9,6 +9,7 @@ import com.gaebaljip.exceed.application.port.in.member.DeleteMemberUseCase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -19,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/v1")
 @SecurityRequirement(name = "access-token")
-@Tag(name = "[회원탈퇴]")
+@Tag(name = SwaggerTag.MEMBER_MANAGEMENT)
 public class DeleteMemberController {
     private final DeleteMemberUseCase deleteMemberUseCase;
 
