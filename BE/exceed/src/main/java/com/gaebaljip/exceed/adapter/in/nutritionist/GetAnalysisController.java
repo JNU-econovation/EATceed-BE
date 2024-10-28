@@ -16,6 +16,7 @@ import com.gaebaljip.exceed.application.port.in.nutritionist.ValidateSignUpBefor
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.nutritionist.GetAnalysisExceptionDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
@@ -31,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/v1")
 @SecurityRequirement(name = "access-token")
-@Tag(name = "[분석 조회]")
+@Tag(name = SwaggerTag.MEAL)
 public class GetAnalysisController {
 
     private final ValidateSignUpBeforeMonthUsecase validateSignUpBeforeMonthUsecase;
@@ -42,7 +43,7 @@ public class GetAnalysisController {
      * @param memberId
      * @return
      */
-    @Operation(summary = "월별 식사 정보 분석", description = "월별 식사 정보를 분석한다.")
+    @Operation(summary = "월별 식사 정보 분석 (켈린더 분석 화면)", description = "월별 식사 정보를 분석한다.")
     @GetMapping("/achieve/{date}")
     @ApiErrorExceptionsExample(GetAnalysisExceptionDocs.class)
     public ApiResponse<ApiResponse.CustomBody<GetMonthlyAnalysisResponse>> getAnalysis(

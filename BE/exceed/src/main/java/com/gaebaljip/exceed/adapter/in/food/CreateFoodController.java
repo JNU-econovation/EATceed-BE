@@ -14,7 +14,9 @@ import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +27,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/v1")
-@Tag(name = "[음식 등록]")
+@Tag(name = SwaggerTag.FOOD)
 public class CreateFoodController {
     private final CreateFoodUseCase createFoodUseCase;
 
+    @Operation(summary = "내 음식 추가", description = "내 음식 추가")
     @PostMapping("/food")
     public ApiResponse<CustomBody<Void>> createFood(
             @RequestBody @Valid CreateFoodRequest request, @AuthenticationMemberId Long memberId) {

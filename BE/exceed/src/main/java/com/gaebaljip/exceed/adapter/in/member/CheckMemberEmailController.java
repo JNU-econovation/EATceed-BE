@@ -13,6 +13,7 @@ import com.gaebaljip.exceed.application.port.in.member.GetCodeUsecase;
 import com.gaebaljip.exceed.application.port.in.member.UpdateCheckedUsecase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.member.CheckMemberEmailExceptionDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
@@ -23,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1")
-@Tag(name = "[이메일 인증]")
+@Tag(name = SwaggerTag.SIGN_UP)
 public class CheckMemberEmailController {
 
     private final CheckCodeUsecase checkCodeUsecase;

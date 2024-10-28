@@ -13,6 +13,7 @@ import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.member.OnBoardingMemberExceptionDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
@@ -26,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/v1")
 @SecurityRequirement(name = "access-token")
-@Tag(name = "[온보딩]")
+@Tag(name = SwaggerTag.ONBOARDING)
 public class OnBoardingController {
 
     private final OnBoardingMemberUsecase onBoardingMemberUsecase;

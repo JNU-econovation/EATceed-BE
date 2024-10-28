@@ -10,6 +10,7 @@ import com.gaebaljip.exceed.application.port.in.food.DeleteFoodUseCase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.food.DeleteFoodExceptionDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
@@ -25,12 +26,12 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/v1")
-@Tag(name = "[음식 삭제]")
+@Tag(name = SwaggerTag.FOOD)
 public class DeleteFoodController {
 
     private final DeleteFoodUseCase deleteFoodUseCase;
 
-    @Operation(description = "내가 등록한 음식 삭제하기")
+    @Operation(summary = "내가 등록한 음식 삭제", description = "내가 등록한 음식 삭제하기")
     @DeleteMapping("/food/{foodId}")
     @ApiErrorExceptionsExample(DeleteFoodExceptionDocs.class)
     public ApiResponse<ApiResponse.CustomBody<Void>> deleteFood(

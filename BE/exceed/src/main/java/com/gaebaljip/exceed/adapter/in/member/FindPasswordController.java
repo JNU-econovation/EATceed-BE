@@ -16,6 +16,7 @@ import com.gaebaljip.exceed.application.port.in.member.UpdatePasswordUsecase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.member.FindPassword_updatePasswordExceptionDocs;
 import com.gaebaljip.exceed.common.docs.member.FindPassword_validateEmailExceptionDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
@@ -27,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1")
-@Tag(name = "[비밀번호 찾기]")
+@Tag(name = SwaggerTag.ACCOUNT_MANAGEMENT)
 public class FindPasswordController {
 
     private final PasswordValidationUsecase passwordValidationUsecase;

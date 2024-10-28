@@ -25,6 +25,7 @@ import com.gaebaljip.exceed.application.service.nutritionist.GetDailyAnalysisSer
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.meal.GetMealExceptionDocs;
 import com.gaebaljip.exceed.common.docs.meal.GetMealFoodExceptionDocs;
 import com.gaebaljip.exceed.common.dto.*;
@@ -42,7 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/v1")
 @SecurityRequirement(name = "access-token")
-@Tag(name = "[식사 조회]")
+@Tag(name = SwaggerTag.MEAL)
 public class GetMealController {
 
     private final GetMaintainNutritionUsecase getMaintainNutritionUsecase;
@@ -54,7 +55,7 @@ public class GetMealController {
     private final GetWeightUseCase getWeightUseCase;
 
     /** 오늘 먹은 식사 정보(단,탄,지 및 칼로리) 조회 */
-    @Operation(summary = "오늘 먹은 식사 정보 조회", description = "오늘 먹은 식사 정보(단,탄,지 및 칼로리)를 조회한다.")
+    @Operation(summary = "오늘 먹은 식사 정보 조회 (홈 화면)", description = "오늘 먹은 식사 정보(단,탄,지 및 칼로리)를 조회한다.")
     @GetMapping("/meal")
     @ApiErrorExceptionsExample(GetMealExceptionDocs.class)
     public ApiResponse<ApiResponse.CustomBody<GetMealAndWeightResponse>> getMeal(
@@ -70,7 +71,9 @@ public class GetMealController {
     }
 
     /** 특정 날짜의 식사 정보(단,탄,지 및 칼로지) 조회 */
-    @Operation(summary = "특정 날짜의 식사 정보 조회", description = "특정 날짜의 식사 정보(단,탄,지 및 칼로리)를 조회한다.")
+    @Operation(
+            summary = "특정 날짜의 식사 정보 조회 (켈린더 상세 화면)",
+            description = "특정 날짜의 식사 정보(단,탄,지 및 칼로리)를 조회한다.")
     @GetMapping("/meal/{date}")
     @ApiErrorExceptionsExample(GetMealFoodExceptionDocs.class)
     public ApiResponse<ApiResponse.CustomBody<GetMealFoodResponse>> getMealFood(

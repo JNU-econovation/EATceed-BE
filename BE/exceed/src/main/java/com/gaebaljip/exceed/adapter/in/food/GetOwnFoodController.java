@@ -12,6 +12,7 @@ import com.gaebaljip.exceed.application.port.in.food.GetOwnFoodUseCase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/v1")
-@Tag(name = "[내가 추가한 음식 조회]")
+@Tag(name = SwaggerTag.FOOD)
 public class GetOwnFoodController {
     private final GetOwnFoodUseCase getOwnFoodUseCase;
 

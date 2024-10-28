@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gaebaljip.exceed.application.port.in.member.VerifyEmailCheckedUsecase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
+import com.gaebaljip.exceed.common.docs.SwaggerTag;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -19,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/v1")
 @SecurityRequirement(name = "access-token")
-@Tag(name = "[회원가입]")
+@Tag(name = SwaggerTag.SIGN_UP)
 public class VerifyEmailCheckedController {
 
     private final VerifyEmailCheckedUsecase verifyEmailCheckedUsecase;
