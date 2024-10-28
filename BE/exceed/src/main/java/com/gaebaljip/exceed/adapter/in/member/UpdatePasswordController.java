@@ -15,6 +15,8 @@ import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
 import com.gaebaljip.exceed.common.docs.SwaggerTag;
+import com.gaebaljip.exceed.common.docs.member.UpdatePasswordExceptionDocs;
+import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,6 +33,7 @@ public class UpdatePasswordController {
 
     @Operation(summary = "비밀번호 변경", description = "비밀번호를 변경할 때 사용한다. 해당 API는 로그인 후에 사용하는 API이다.")
     @PatchMapping("/members/password")
+    @ApiErrorExceptionsExample(UpdatePasswordExceptionDocs.class)
     public ApiResponse<CustomBody<Void>> updatePassword(
             @Parameter(hidden = true) @AuthenticationMemberId Long memberId,
             @RequestBody @Valid UpdatePasswordRequest request) {
