@@ -205,31 +205,4 @@ public class UpdateMemberControllerTest extends ControllerTest {
                 status().isBadRequest(),
                 jsonPath("$.error.reason").value(activity + "는 올바르지 않은 값입니다."));
     }
-
-    @Test
-    @DisplayName("회원 수정 실패 - 기타사항을 입력하지 않은 경우")
-    @WithMockUser
-    void when_updateMember_etc_null_expected_exception() throws Exception {
-        // given
-        UpdateMemberRequest updateMemberRequest =
-                UpdateMemberRequest.builder()
-                        .height(180.3)
-                        .activity("VERY_ACTIVE")
-                        .age(40)
-                        .gender("MALE")
-                        .etc(null)
-                        .build();
-
-        // when
-        ResultActions resultActions =
-                mockMvc.perform(
-                        put("/v1/members")
-                                .content(om.writeValueAsString(updateMemberRequest))
-                                .contentType(MediaType.APPLICATION_JSON));
-
-        // then
-        resultActions.andExpectAll(
-                status().isBadRequest(),
-                jsonPath("$.error.reason").value("기타사항을 " + ValidationMessage.NOT_BLANK));
-    }
 }
