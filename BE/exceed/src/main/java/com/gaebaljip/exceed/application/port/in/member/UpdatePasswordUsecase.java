@@ -5,4 +5,6 @@ import com.gaebaljip.exceed.common.annotation.UseCase;
 @UseCase
 public interface UpdatePasswordUsecase {
     void execute(String email, String password);
+
+    void execute(Long memberId, String oldPassword, String newPassword);
 }
