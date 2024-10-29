@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -16,10 +18,11 @@ import com.gaebaljip.exceed.common.WithMockUser;
 
 public class UpdateMemberControllerTest extends ControllerTest {
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"", "  ", "매운 거 못 먹음"})
     @DisplayName("회원 수정 성공")
     @WithMockUser
-    void when_updateMember_expected_success() throws Exception {
+    void when_updateMember_expected_success(String etc) throws Exception {
         // given
         UpdateMemberRequest updateMemberRequest =
                 UpdateMemberRequest.builder()
@@ -27,7 +30,7 @@ public class UpdateMemberControllerTest extends ControllerTest {
                         .activity("VERY_ACTIVE")
                         .age(40)
                         .gender("MALE")
-                        .etc("회원 수정")
+                        .etc(etc)
                         .build();
         // when
         ResultActions resultActions =
