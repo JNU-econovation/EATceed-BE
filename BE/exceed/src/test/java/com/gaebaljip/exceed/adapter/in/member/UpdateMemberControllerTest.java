@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -16,10 +18,11 @@ import com.gaebaljip.exceed.common.WithMockUser;
 
 public class UpdateMemberControllerTest extends ControllerTest {
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"", "  ", "매운 거 못 먹음"})
     @DisplayName("회원 수정 성공")
     @WithMockUser
-    void when_updateMember_expected_success() throws Exception {
+    void when_updateMember_expected_success(String etc) throws Exception {
         // given
         UpdateMemberRequest updateMemberRequest =
                 UpdateMemberRequest.builder()
@@ -27,7 +30,7 @@ public class UpdateMemberControllerTest extends ControllerTest {
                         .activity("VERY_ACTIVE")
                         .age(40)
                         .gender("MALE")
-                        .etc("회원 수정")
+                        .etc(etc)
                         .build();
         // when
         ResultActions resultActions =
@@ -204,32 +207,5 @@ public class UpdateMemberControllerTest extends ControllerTest {
         resultActions.andExpectAll(
                 status().isBadRequest(),
                 jsonPath("$.error.reason").value(activity + "는 올바르지 않은 값입니다."));
-    }
-
-    @Test
-    @DisplayName("회원 수정 실패 - 기타사항을 입력하지 않은 경우")
-    @WithMockUser
-    void when_updateMember_etc_null_expected_exception() throws Exception {
-        // given
-        UpdateMemberRequest updateMemberRequest =
-                UpdateMemberRequest.builder()
-                        .height(180.3)
-                        .activity("VERY_ACTIVE")
-                        .age(40)
-                        .gender("MALE")
-                        .etc(null)
-                        .build();
-
-        // when
-        ResultActions resultActions =
-                mockMvc.perform(
-                        put("/v1/members")
-                                .content(om.writeValueAsString(updateMemberRequest))
-                                .contentType(MediaType.APPLICATION_JSON));
-
-        // then
-        resultActions.andExpectAll(
-                status().isBadRequest(),
-                jsonPath("$.error.reason").value("기타사항을 " + ValidationMessage.NOT_BLANK));
     }
 }
