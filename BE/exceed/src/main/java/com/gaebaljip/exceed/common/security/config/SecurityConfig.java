@@ -1,7 +1,5 @@
 package com.gaebaljip.exceed.common.security.config;
 
-import java.util.Arrays;
-
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -11,10 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.CorsUtils;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.gaebaljip.exceed.common.security.domain.JwtManager;
 import com.gaebaljip.exceed.common.security.domain.JwtResolver;
@@ -50,9 +45,6 @@ public class SecurityConfig {
                 .disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .cors()
-                .configurationSource(corsConfigurationSource())
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationPoint)
@@ -92,24 +84,6 @@ public class SecurityConfig {
                 new JwtAuthenticationFilter(jwtManager, jwtResolver, memberDetailService),
                 UsernamePasswordAuthenticationFilter.class);
         return http.build();
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(
-                Arrays.asList("HEAD", "POST", "GET", "DELETE", "PUT", "PATCH", "OPTIONS"));
-        configuration.setAllowedHeaders(
-                Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        configuration.setExposedHeaders(Arrays.asList("Authorization"));
-        configuration.setMaxAge(3600L);
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 
     @Bean
