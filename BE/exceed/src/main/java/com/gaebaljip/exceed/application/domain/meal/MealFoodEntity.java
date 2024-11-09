@@ -64,6 +64,26 @@ public class MealFoodEntity extends BaseEntity {
         return mealFoodEntities;
     }
 
+    public double getAdjustedCalorie() {
+        return this.unit
+                .getStrategy()
+                .measure(this.foodEntity.getCalorie(), unit, this.foodEntity.getServingSize());
+    }
+
+    public double getAdjustedCarbohydrate() {
+        return unit.getStrategy()
+                .measure(this.foodEntity.getCarbohydrate(), unit, this.foodEntity.getServingSize());
+    }
+
+    public double getAdjustedProtein() {
+        return unit.getStrategy()
+                .measure(this.foodEntity.getProtein(), unit, this.foodEntity.getServingSize());
+    }
+
+    public double getAdjustedFat() {
+        return unit.getStrategy()
+                .measure(this.foodEntity.getFat(), unit, this.foodEntity.getServingSize());
+    }
     @Override
     public String toString() {
         return "MealFoodEntity{"
@@ -76,19 +96,4 @@ public class MealFoodEntity extends BaseEntity {
                 + '}';
     }
 
-    public double getAdjustedCalorie() {
-        return this.unit.getStrategy().measure(this.foodEntity.getCalorie(), unit);
-    }
-
-    public double getAdjustedCarbohydrate() {
-        return unit.getStrategy().measure(this.foodEntity.getCarbohydrate(), unit);
-    }
-
-    public double getAdjustedProtein() {
-        return unit.getStrategy().measure(this.foodEntity.getProtein(), unit);
-    }
-
-    public double getAdjustedFat() {
-        return unit.getStrategy().measure(this.foodEntity.getFat(), unit);
-    }
 }
