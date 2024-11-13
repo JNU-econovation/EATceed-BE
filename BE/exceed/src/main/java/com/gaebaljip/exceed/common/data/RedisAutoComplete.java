@@ -42,8 +42,8 @@ public class RedisAutoComplete implements ApplicationRunner {
                 List<String[]> allRows = reader.readAll();
                 int pk = 1;
                 for (String[] row : allRows) {
-                    if (row != null && row.length > 0 && !row[4].isEmpty()) {
-                        String foodName = row[4].trim();
+                    if (row != null && row.length > 0 && !row[0].isEmpty()) {
+                        String foodName = row[0].trim();
                         addFoodToAutocomplete(foodName, pk);
                     }
                     pk++;
