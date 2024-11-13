@@ -47,7 +47,7 @@ public class GetFoodIntegrationTest extends IntegrationTest {
     @DisplayName("음식 자동완성 : 성공")
     void when_getFoodsAuto_expected_success() throws Exception {
         // given
-        String prefix = "감";
+        String prefix = "연어";
         Long size = redisUtils.zSize(RedisKeys.AUTO_COMPLETE_KEY);
 
         ResultActions resultActions =
@@ -61,8 +61,8 @@ public class GetFoodIntegrationTest extends IntegrationTest {
         resultActions
                 .andExpectAll(
                         status().isOk(),
-                        jsonPath("$.response.foodJson[0]").value("감자된장국:21;"),
-                        jsonPath("$.response.foodJson[1]").value("감자볶음:22;"))
+                        jsonPath("$.response.foodJson[0]").value("연어구이:6968;"),
+                        jsonPath("$.response.foodJson[1]").value("연어롤:8;"))
                 .andDo(
                         document(
                                 "get-food-noQueryString-success",
