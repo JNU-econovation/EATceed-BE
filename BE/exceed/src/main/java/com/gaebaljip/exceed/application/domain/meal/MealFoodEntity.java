@@ -84,6 +84,7 @@ public class MealFoodEntity extends BaseEntity {
         return unit.getStrategy()
                 .measure(this.foodEntity.getFat(), unit, this.foodEntity.getServingSize());
     }
+
     @Override
     public String toString() {
         return "MealFoodEntity{"
@@ -95,5 +96,4 @@ public class MealFoodEntity extends BaseEntity {
                 + unit.getG()
                 + '}';
     }
-
 }
