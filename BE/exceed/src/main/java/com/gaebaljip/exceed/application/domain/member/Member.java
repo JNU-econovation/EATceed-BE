@@ -51,15 +51,15 @@ public class Member {
     }
 
     public double measureTargetCarbohydrate() {
-        return measureMaintainCarbohydrate() / 5;
+        return measureTargetCalorie() / 5;
     }
 
     public double measureTargetProtein() {
-        return measureMaintainProtein() / 3;
+        return measureTargetCalorie() / 3;
     }
 
     public double measureTargetFat() {
-        return measureMaintainFat() / 2;
+        return measureTargetCalorie() / 2;
     }
 
     public double measureTargetCalorie() {
