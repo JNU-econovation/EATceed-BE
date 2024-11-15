@@ -127,6 +127,7 @@ public class GlobalExceptionHandler {
     protected ApiResponse<?> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException e) {
         return ApiResponseGenerator.fail(
+                GlobalError.INVALID_FIELD.getCode(),
                 e.getBindingResult().getFieldErrors().get(0).getDefaultMessage(),
                 HttpStatus.BAD_REQUEST);
     }

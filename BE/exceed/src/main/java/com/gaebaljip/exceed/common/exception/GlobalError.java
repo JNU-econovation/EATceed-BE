@@ -15,6 +15,9 @@ public enum GlobalError implements BaseError {
     ENCRYPTION_FAIL(500, "ENCRYPTION_500_1", "암호화에 실패하였습니다."),
     DECRYPTION_FAIL(500, "ENCRYPTION_500_2", "복호화에 실패하였습니다."),
     EXTENTION_NOT_ALLOWED(400, "GLOBAL_400_1", "이미지의 확장자는 jpg, jpeg, png만 가능합니다."),
+
+    // AOS에서 Default Message를 사용하도록 하는 에러 코드
+    INVALID_FIELD(400, "GLOBAL_400_999", "응답시 반환되는 error.reason을 사용해주세요.");
     ;
 
     private final Integer status;
