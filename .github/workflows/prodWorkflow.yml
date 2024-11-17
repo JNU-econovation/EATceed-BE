@@ -7,10 +7,6 @@ on:
     types:
       - closed
 
-defaults:
-  run:
-    working-directory: ./BE/exceed
-
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -46,7 +42,7 @@ jobs:
         id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
         with:
-          paths: ${{ github.workspace }}/**/build/reports/jacoco/test/jacocoTestReport.xml
+          paths: ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send docker-compose-prod.yml
@@ -55,7 +51,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: ./BE/exceed/docker-compose-prod.yml
+          source: ./docker-compose-prod.yml
           target: /home/ubuntu/backend-deploy
 
       - name: Send resources-prod-environment
@@ -64,7 +60,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: ./BE/exceed/resources/gaebaljip-prod-environment
+          source: ./resources/gaebaljip-prod-environment
           target: /home/ubuntu/backend-deploy
 
       - name: Create .env.prod file
@@ -77,7 +73,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: ./BE/exceed/.env.prod
+          source: ./.env.prod
           target: /home/ubuntu/backend-deploy
 
       - name: Docker Image Build

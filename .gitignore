@@ -1,40 +1,62 @@
-AI/server/detect_model/food_classification/foodcls.mar
-# Gradle files
-.gradle/
+HELP.md
+.gradle
 build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# Local configuration file (sdk path, etc)
-local.properties
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
-# Log/OS Files
-*.log
-
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.apk
-output.json
-
-# IntelliJ
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-# Keystore files
-*.jks
-*.keystore
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
+### VS Code ###
+.vscode/
 
-# Android Profiling
-*.hprof
+### Rest Docs ###
 
+BOOT-INF/
+src/docs/asciidoc/api-doc.adoc
+src/main/resources/static/docs/api-doc.html
+
+
+### env
+.env
+.env.prod
+
+### jmh
+
+src/jmh/**
+
+### log
+**/*.log
 
 .DS_Store
 ._.DS_Store
 **/.DS_Store
 **/._.DS_Store
+
+lombok.config
