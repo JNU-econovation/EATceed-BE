@@ -79,15 +79,15 @@ public class GetMealController {
     public ApiResponse<ApiResponse.CustomBody<GetMealFoodResponse>> getMealFood(
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
             @Parameter(hidden = true) @AuthenticationMemberId Long memberId) {
-        LocalDateTime localDateTime = date.atStartOfDay();
-        validateBeforeSignUpDateUsecase.execute(memberId, localDateTime);
+        LocalDateTime adjustedDateTime = getAdjustedDateTime(date);
+        validateBeforeSignUpDateUsecase.execute(memberId, adjustedDateTime);
         MaintainMealDTO maintainMealDTO =
-                getMaintainNutritionUsecase.execute(memberId, localDateTime);
-        TargetMealDTO targetMealDTO = getTargetNutritionUsecase.execute(memberId, localDateTime);
-        SpecificMealDTO specificMealDTO = getSpecificMealQuery.execute(memberId, localDateTime);
+                getMaintainNutritionUsecase.execute(memberId, adjustedDateTime);
+        TargetMealDTO targetMealDTO = getTargetNutritionUsecase.execute(memberId, adjustedDateTime);
+        SpecificMealDTO specificMealDTO = getSpecificMealQuery.execute(memberId, adjustedDateTime);
         AllAnalysisDTO allAnalysisDTO =
                 getDailyAnalysisService.executeToAllNutrition(
-                        GetDailyAnalysisCommand.of(memberId, localDateTime));
+                        GetDailyAnalysisCommand.of(memberId, adjustedDateTime));
         return ApiResponseGenerator.success(
                 new GetMealFoodResponse(
                         GetMealResponse.of(
