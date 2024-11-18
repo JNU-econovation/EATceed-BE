@@ -96,4 +96,11 @@ public class GetMealController {
                         allAnalysisDTO),
                 HttpStatus.OK);
     }
+
+    private LocalDateTime getAdjustedDateTime(LocalDate date) {
+        if (date.equals(LocalDate.now())) {
+            return LocalDateTime.now();
+        }
+        return date.atStartOfDay();
+    }
 }
