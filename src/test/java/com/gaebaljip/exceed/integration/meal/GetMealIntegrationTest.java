@@ -30,7 +30,6 @@ import com.gaebaljip.exceed.common.WithMockUser;
 import com.gaebaljip.exceed.common.dto.AllAnalysisDTO;
 import com.gaebaljip.exceed.common.dto.MealRecordDTO;
 import com.gaebaljip.exceed.common.exception.meal.MealError;
-import com.gaebaljip.exceed.common.exception.member.MemberError;
 
 @InitializeS3Bucket
 public class GetMealIntegrationTest extends IntegrationTest {
@@ -174,21 +173,24 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("실패 : 회원가입 후 2일 후에 온보딩할 경우" + "예외 발생")
+    @DisplayName("성공 : 온보딩 혹은 회원 수정 직후 해당 온보딩 날짜에 캘린더 상세 조회가 정상적으로 이루어져야 한다.")
     @Sql("classpath:db/testData_signup_after_2days_onboarding.sql")
     @WithMockUser(memberId = 1L)
-    void when_signUp_onBoarding_after_2_days_user_getSpecificMea_updatedAt() throws Exception {
+    void when_onBoarding_completedAt_getSpecificMeal_expected_success() throws Exception {
         // given
         MemberEntity memberEntity = memberRepository.findById(1L).get();
-        LocalDate testData = memberEntity.getUpdatedDate().toLocalDate();
+        memberEntity.updateWeight(memberEntity.getWeight(), memberEntity.getTargetWeight() + 1);
+        memberRepository.save(memberEntity);
+        LocalDate onboardingCompletedAt =
+                memberRepository.findById(1L).get().getUpdatedDate().toLocalDate();
 
+        // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        MockMvcRequestBuilders.get("/v1/meal/" + testData)
+                        MockMvcRequestBuilders.get("/v1/meal/" + onboardingCompletedAt)
                                 .contentType(MediaType.APPLICATION_JSON));
 
-        resultActions.andExpectAll(
-                status().is5xxServerError(),
-                jsonPath("$.error.code").value(MemberError.HISTORY_NOT_FOUND.getCode()));
+        // then
+        resultActions.andExpectAll(status().isOk());
     }
 }
