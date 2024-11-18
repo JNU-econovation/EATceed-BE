@@ -14,9 +14,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gaebaljip.exceed.adapter.in.meal.response.GetMealFoodResponse;
@@ -30,7 +30,6 @@ import com.gaebaljip.exceed.common.WithMockUser;
 import com.gaebaljip.exceed.common.dto.AllAnalysisDTO;
 import com.gaebaljip.exceed.common.dto.MealRecordDTO;
 import com.gaebaljip.exceed.common.exception.meal.MealError;
-import com.gaebaljip.exceed.common.exception.member.MemberError;
 
 @InitializeS3Bucket
 public class GetMealIntegrationTest extends IntegrationTest {
@@ -47,7 +46,7 @@ public class GetMealIntegrationTest extends IntegrationTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/meal")
+                        MockMvcRequestBuilders.get("/v1/meal")
                                 .contentType(MediaType.APPLICATION_JSON));
 
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
@@ -81,7 +80,7 @@ public class GetMealIntegrationTest extends IntegrationTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/meal/" + testData)
+                        MockMvcRequestBuilders.get("/v1/meal/" + testData)
                                 .contentType(MediaType.APPLICATION_JSON));
 
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
@@ -125,16 +124,17 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("성공 : 2023년 12월 05일 기준 식사 조회" + "isVisited는 false이고, 식사 기록 존재하지 않는다.")
+    @DisplayName("성공 : 미래 날짜로 켈린더 상세 조회시 식사 기록은 존재하지 않고, 방문하지도 않았다.")
     @WithMockUser
     void when_getSpecificMeal_expected_isVisited_false_mealRecord_existed() throws Exception {
-
-        LocalDate testData = LocalDate.of(2025, 12, 05);
+        MemberEntity memberEntity = memberRepository.findById(1L).get();
+        LocalDate futureDate =
+                memberEntity.getUpdatedDate().toLocalDate().plusDays(Integer.MAX_VALUE);
 
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/meal/" + testData)
+                        MockMvcRequestBuilders.get("/v1/meal/" + futureDate)
                                 .contentType(MediaType.APPLICATION_JSON));
 
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
@@ -165,7 +165,7 @@ public class GetMealIntegrationTest extends IntegrationTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/meal/" + testData)
+                        MockMvcRequestBuilders.get("/v1/meal/" + testData)
                                 .contentType(MediaType.APPLICATION_JSON));
 
         resultActions.andExpectAll(
@@ -174,21 +174,24 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("실패 : 회원가입 후 2일 후에 온보딩할 경우" + "예외 발생")
+    @DisplayName("성공 : 온보딩 혹은 회원 수정 직후 해당 온보딩 날짜에 캘린더 상세 조회가 정상적으로 이루어져야 한다.")
     @Sql("classpath:db/testData_signup_after_2days_onboarding.sql")
     @WithMockUser(memberId = 1L)
-    void when_signUp_onBoarding_after_2_days_user_getSpecificMea_updatedAt() throws Exception {
+    void when_onBoarding_completedAt_getSpecificMeal_expected_success() throws Exception {
         // given
         MemberEntity memberEntity = memberRepository.findById(1L).get();
-        LocalDate testData = memberEntity.getUpdatedDate().toLocalDate();
+        memberEntity.updateWeight(memberEntity.getWeight(), memberEntity.getTargetWeight() + 1);
+        memberRepository.save(memberEntity);
+        LocalDate onboardingCompletedAt =
+                memberRepository.findById(1L).get().getUpdatedDate().toLocalDate();
 
+        // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/meal/" + testData)
+                        MockMvcRequestBuilders.get("/v1/meal/" + onboardingCompletedAt)
                                 .contentType(MediaType.APPLICATION_JSON));
 
-        resultActions.andExpectAll(
-                status().is5xxServerError(),
-                jsonPath("$.error.code").value(MemberError.HISTORY_NOT_FOUND.getCode()));
+        // then
+        resultActions.andExpectAll(status().isOk());
     }
 }
