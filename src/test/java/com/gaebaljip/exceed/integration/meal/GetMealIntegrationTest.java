@@ -124,16 +124,17 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("성공 : 2023년 12월 05일 기준 식사 조회" + "isVisited는 false이고, 식사 기록 존재하지 않는다.")
+    @DisplayName("성공 : 미래 날짜로 켈린더 상세 조회시 식사 기록은 존재하지 않고, 방문하지도 않았다.")
     @WithMockUser
     void when_getSpecificMeal_expected_isVisited_false_mealRecord_existed() throws Exception {
-
-        LocalDate testData = LocalDate.of(2025, 12, 05);
+        MemberEntity memberEntity = memberRepository.findById(1L).get();
+        LocalDate futureDate =
+                memberEntity.getUpdatedDate().toLocalDate().plusDays(Integer.MAX_VALUE);
 
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        MockMvcRequestBuilders.get("/v1/meal/" + testData)
+                        MockMvcRequestBuilders.get("/v1/meal/" + futureDate)
                                 .contentType(MediaType.APPLICATION_JSON));
 
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
