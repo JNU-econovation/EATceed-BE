@@ -113,9 +113,8 @@ public class MemberEntity extends BaseEntity {
                 && this.getTargetWeight() != null;
     }
 
-    public boolean checkIfBeforeSignUpDate(
-            LocalDateTime checkDateTime, LocalDateTime comparisonDate) {
-        return checkDateTime.isBefore(comparisonDate);
+    public boolean checkIfBeforeSignUpDate(LocalDateTime checkDateTime, LocalDateTime createdAt) {
+        return checkDateTime.isBefore(createdAt);
     }
 
     public boolean checkIfBeforeSignUpMonth(LocalDate checkDate, LocalDateTime createdDateTime) {
