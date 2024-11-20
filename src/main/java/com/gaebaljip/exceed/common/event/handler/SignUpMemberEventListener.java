@@ -34,15 +34,22 @@ public class SignUpMemberEventListener {
     @Timer
     @Async
     public void handle(SignUpMemberEvent event) {
-        codePort.saveWithExpiration(event.getEmail(), Code.create(), expiredTime);
+        int randomCode = createRandom();
+        codePort.saveWithExpiration(event.getEmail(), String.valueOf(randomCode), expiredTime);
         Context context = new Context();
         context.setVariable(
                 MailTemplate.SIGN_UP_MAIL_CONTEXT, URL + MailTemplate.REPLY_TO_SIGN_UP_MAIL_URL);
-        context.setVariable(MailTemplate.SIGN_UP_EMAIL, "?email=" + event.getEmail());
+        context.setVariable(MailTemplate.SIGN_UP_CODE, randomCode);
         emailPort.sendEmail(
                 event.getEmail(),
                 MailTemplate.SIGN_UP_TITLE,
                 MailTemplate.SIGN_UP_TEMPLATE,
                 context);
+    }
+
+    private int createRandom() {
+        Code code = new Code();
+        int random = code.createRandom();
+        return random;
     }
 }
