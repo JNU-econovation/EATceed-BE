@@ -20,19 +20,21 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class LoggingFilter extends OncePerRequestFilter {
-    private final List<String> excludeUrl =
+    public static final String SWAGGER_URI = "/swagger-ui";
+    private static final List<String> excludeUrl =
             List.of(
                     "/actuator/health",
                     "/actuator/prometheus",
                     "/v1/health",
                     "/api-docs/swagger-config",
-                    "/api-docs");
+                    "/api-docs",
+                    "/favicon.ico");
 
     @Override
     protected void doFilterInternal(
             HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        if (excludeUrl.contains(request.getRequestURI())) {
+        if (isExcludeUrl(request)) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -54,5 +56,10 @@ public class LoggingFilter extends OncePerRequestFilter {
         httpServletResponse.copyBodyToResponse(); // 다시한번 더 바디를 채워준다.
 
         MDC.remove(LogKey.KEY);
+    }
+
+    private boolean isExcludeUrl(HttpServletRequest request) {
+        return excludeUrl.contains(request.getRequestURI())
+                || request.getRequestURI().contains(SWAGGER_URI);
     }
 }
