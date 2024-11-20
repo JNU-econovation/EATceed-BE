@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.gaebaljip.exceed.adapter.in.member.request.CheckMemberRequest;
 import com.gaebaljip.exceed.application.port.in.member.CheckCodeUsecase;
-import com.gaebaljip.exceed.application.port.in.member.GetCodeUsecase;
 import com.gaebaljip.exceed.application.port.in.member.UpdateCheckedUsecase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
@@ -28,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 public class CheckMemberEmailController {
 
     private final CheckCodeUsecase checkCodeUsecase;
-    private final GetCodeUsecase getCodeUsecase;
     private final UpdateCheckedUsecase updateCheckedUsecase;
 
     @Value("${exceed.deepLink.signUp}")
@@ -46,11 +44,8 @@ public class CheckMemberEmailController {
 
     @Operation(summary = "링크 클릭시 리다이렉트", description = "AOS는 몰라도 되는 API")
     @GetMapping("/signUp-redirect")
-    public void redirect(@RequestParam String email, HttpServletResponse response) {
-        StringBuilder sb = new StringBuilder();
-        String code = getCodeUsecase.execute(email);
-        String redirectUrl = sb.append(deepLink).append("?code=").append(code).toString();
-        response.setHeader("Location", redirectUrl);
+    public void redirect(HttpServletResponse response) {
+        response.setHeader("Location", deepLink);
         response.setStatus(302);
     }
 }
