@@ -12,7 +12,6 @@ import com.gaebaljip.exceed.application.domain.member.Code;
 import com.gaebaljip.exceed.application.port.out.member.CodePort;
 import com.gaebaljip.exceed.application.port.out.member.EmailPort;
 import com.gaebaljip.exceed.common.MailTemplate;
-import com.gaebaljip.exceed.common.annotation.Timer;
 import com.gaebaljip.exceed.common.event.SignUpMemberEvent;
 
 import lombok.RequiredArgsConstructor;
@@ -31,7 +30,6 @@ public class SignUpMemberEventListener {
 
     @TransactionalEventListener(classes = SignUpMemberEvent.class)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    @Timer
     @Async
     public void handle(SignUpMemberEvent event) {
         int randomCode = createRandom();

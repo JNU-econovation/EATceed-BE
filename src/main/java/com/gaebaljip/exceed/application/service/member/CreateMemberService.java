@@ -9,7 +9,6 @@ import com.gaebaljip.exceed.application.domain.member.MemberEntity;
 import com.gaebaljip.exceed.application.port.in.member.CreateMemberUsecase;
 import com.gaebaljip.exceed.application.port.out.member.MemberPort;
 import com.gaebaljip.exceed.common.annotation.EventPublisherStatus;
-import com.gaebaljip.exceed.common.annotation.Timer;
 import com.gaebaljip.exceed.common.event.Events;
 import com.gaebaljip.exceed.common.event.SignUpMemberEvent;
 
@@ -23,7 +22,6 @@ public class CreateMemberService implements CreateMemberUsecase {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    @Timer
     @Transactional
     @EventPublisherStatus
     public void execute(SignUpMemberRequest signUpMemberRequest) {
