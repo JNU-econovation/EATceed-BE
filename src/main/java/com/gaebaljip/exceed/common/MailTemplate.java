@@ -13,4 +13,5 @@ public class MailTemplate {
     public static final String FIND_PASSWORD_EMAIL = "email";
     public static final String REPLY_TO_SIGN_UP_MAIL_URL = "/v1/signUp-redirect";
     public static final String REPLY_TO_FIND_PASSWORD_MAIL_URL = "/v1/findPassword-redirect";
+    public static final String FIND_PASSWORD_CODE = "code";
 }
