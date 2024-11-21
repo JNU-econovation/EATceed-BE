@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.gaebaljip.exceed.application.port.out.member.CodePort;
-import com.gaebaljip.exceed.common.annotation.Timer;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +20,6 @@ public class RedisAdapter implements CodePort {
     }
 
     @Override
-    @Timer
     public Optional<String> query(String key) {
         return Optional.ofNullable(redisUtils.getData(key));
     }
