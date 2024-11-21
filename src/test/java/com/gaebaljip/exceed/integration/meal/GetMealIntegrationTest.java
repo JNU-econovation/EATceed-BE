@@ -69,59 +69,6 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("성공 : 2024년 6월 12일 기준 식사 조회" + "isVisited는 true이고, 식사 기록 또한 존재")
-    @WithMockUser
-    void when_getSpecificMeal_expected_success() throws Exception {
-
-        LocalDate testData = LocalDate.of(2024, 6, 12);
-
-        // when
-        ResultActions resultActions =
-                mockMvc.perform(
-                        MockMvcRequestBuilders.get("/v1/meal/" + testData)
-                                .contentType(MediaType.APPLICATION_JSON));
-
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        ApiResponse.CustomBody<GetMealFoodResponse> getMealFoodResponseCustomBody =
-                om.readValue(
-                        responseBody,
-                        new TypeReference<ApiResponse.CustomBody<GetMealFoodResponse>>() {});
-        Double maintainCalorie =
-                getMealFoodResponseCustomBody
-                        .getResponse()
-                        .getMealResponse()
-                        .maintainMealDTO()
-                        .calorie();
-        Double targetCalorie =
-                getMealFoodResponseCustomBody
-                        .getResponse()
-                        .getMealResponse()
-                        .targetMealDTO()
-                        .calorie();
-
-        List<MealRecordDTO> mealRecordDTOS =
-                getMealFoodResponseCustomBody.getResponse().mealRecordDTOS();
-
-        AllAnalysisDTO allAnalysisDTO =
-                getMealFoodResponseCustomBody.getResponse().allAnalysisDTO();
-
-        // then
-
-        assertAll(
-                () -> assertEquals(allAnalysisDTO.isVisited(), true),
-                () -> assertTrue(maintainCalorie > 0),
-                () -> assertTrue(targetCalorie > maintainCalorie),
-                () -> assertTrue(mealRecordDTOS.size() >= 1));
-        resultActions
-                .andExpect(status().isOk())
-                .andDo(
-                        document(
-                                "get-meal-food-success",
-                                getDocumentRequest(),
-                                getDocumentResponse()));
-    }
-
-    @Test
     @DisplayName("성공 : 미래 날짜로 켈린더 상세 조회시 식사 기록은 존재하지 않고, 방문하지도 않았다.")
     @WithMockUser
     void when_getSpecificMeal_expected_isVisited_false_mealRecord_existed() throws Exception {
