@@ -38,7 +38,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-        log.info("bearerToken : {}", bearerToken);
         if (bearerToken == null || !bearerToken.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -79,7 +78,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         boolean flag = false;
         for (String url : excludeUrl) {
-            if (path.startsWith(url)) {
+            if (path.contains(url)) {
                 flag = true;
             }
         }
