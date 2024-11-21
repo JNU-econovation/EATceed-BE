@@ -177,7 +177,7 @@ public class GetMealIntegrationTest extends IntegrationTest {
     @DisplayName("성공 : 온보딩 혹은 회원 수정 직후 해당 온보딩 날짜에 캘린더 상세 조회가 정상적으로 이루어져야 한다.")
     @Sql("classpath:db/testData_signup_after_2days_onboarding.sql")
     @WithMockUser(memberId = 1L)
-    void when_onBoarding_completedAt_getSpecificMeal_expected_success() throws Exception {
+    void when_getSpecificMeal_onBoarding_completedAt__expected_success() throws Exception {
         // given
         MemberEntity memberEntity = memberRepository.findById(1L).get();
         memberEntity.updateWeight(memberEntity.getWeight(), memberEntity.getTargetWeight() + 1);
