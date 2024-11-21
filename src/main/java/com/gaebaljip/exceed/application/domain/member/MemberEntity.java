@@ -104,7 +104,7 @@ public class MemberEntity extends BaseEntity {
         this.password = password;
     }
 
-    public boolean checkOnBoarding() {
+    public boolean isOnBoarding() {
         return this.getWeight() != null
                 && this.getHeight() != null
                 && this.getAge() != null
