@@ -4,7 +4,6 @@ import static com.gaebaljip.exceed.common.util.ApiDocumentUtil.getDocumentReques
 import static com.gaebaljip.exceed.common.util.ApiDocumentUtil.getDocumentResponse;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
@@ -29,7 +28,6 @@ import com.gaebaljip.exceed.common.IntegrationTest;
 import com.gaebaljip.exceed.common.WithMockUser;
 import com.gaebaljip.exceed.common.dto.AllAnalysisDTO;
 import com.gaebaljip.exceed.common.dto.MealRecordDTO;
-import com.gaebaljip.exceed.common.exception.meal.MealError;
 
 @InitializeS3Bucket
 public class GetMealIntegrationTest extends IntegrationTest {
@@ -155,22 +153,21 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("실패 : 2023년 11월 1일 기준 식사 조회" + "회원가입 전이기 때문에 오류 발생")
-    @WithMockUser
+    @DisplayName("성공 : 회원가입한 날짜에 켈린더 상세 조회가 정상적으로 이루어져야 한다.")
+    @WithMockUser(memberId = 2L)
     void when_getSpecificMeal_createdAt_expected_InValidDateFoundException() throws Exception {
 
-        MemberEntity memberEntity = memberRepository.findById(1L).get();
-        LocalDate testData = memberEntity.getCreatedDate().toLocalDate();
+        long memberId = 2L;
+        MemberEntity memberEntity = memberRepository.findById(memberId).get();
+        LocalDate signUpDate = memberEntity.getCreatedDate().toLocalDate();
 
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        MockMvcRequestBuilders.get("/v1/meal/" + testData)
+                        MockMvcRequestBuilders.get("/v1/meal/" + signUpDate)
                                 .contentType(MediaType.APPLICATION_JSON));
 
-        resultActions.andExpectAll(
-                status().isBadRequest(),
-                jsonPath("$.error.code").value(MealError.INVALID_DATE_FOUND.getCode()));
+        resultActions.andExpect(status().isOk());
     }
 
     @Test
@@ -201,8 +198,6 @@ public class GetMealIntegrationTest extends IntegrationTest {
     @WithMockUser(memberId = 1L)
     void when_getSpecificMeal_onBoardingDate_expected_success() throws Exception {
         // given
-        MemberEntity memberEntity = memberRepository.findById(1L).get();
-        memberRepository.save(memberEntity);
         LocalDate onBoardingDate =
                 memberRepository.findById(1L).get().getUpdatedDate().toLocalDate();
 
