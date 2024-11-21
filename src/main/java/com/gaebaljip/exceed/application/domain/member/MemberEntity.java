@@ -73,11 +73,6 @@ public class MemberEntity extends BaseEntity {
     public void updateChecked() {
         this.checked = true;
     }
-
-    public boolean isSignUp() {
-        return checked;
-    }
-
     public void updateMember(
             double height,
             Gender gender,
@@ -103,8 +98,11 @@ public class MemberEntity extends BaseEntity {
     public void updatePassword(String password) {
         this.password = password;
     }
+    public boolean isSignUp() {
+        return checked;
+    }
 
-    public boolean checkOnBoarding() {
+    public boolean isOnBoarding() {
         return this.getWeight() != null
                 && this.getHeight() != null
                 && this.getAge() != null
@@ -113,11 +111,11 @@ public class MemberEntity extends BaseEntity {
                 && this.getTargetWeight() != null;
     }
 
-    public boolean checkIfBeforeSignUpDate(LocalDateTime checkDateTime, LocalDateTime createdAt) {
+    public boolean isBeforeSignUpDate(LocalDateTime checkDateTime, LocalDateTime createdAt) {
         return checkDateTime.isBefore(createdAt);
     }
 
-    public boolean checkIfBeforeSignUpMonth(LocalDate checkDate, LocalDateTime createdDateTime) {
+    public boolean isBeforeSignUpMonth(LocalDate checkDate, LocalDateTime createdDateTime) {
         LocalDate comparisonDate = createdDateTime.toLocalDate().withDayOfMonth(1);
         return checkDate.isBefore(comparisonDate);
     }

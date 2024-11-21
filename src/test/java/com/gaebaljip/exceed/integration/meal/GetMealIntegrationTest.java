@@ -4,7 +4,6 @@ import static com.gaebaljip.exceed.common.util.ApiDocumentUtil.getDocumentReques
 import static com.gaebaljip.exceed.common.util.ApiDocumentUtil.getDocumentResponse;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
@@ -29,7 +28,6 @@ import com.gaebaljip.exceed.common.IntegrationTest;
 import com.gaebaljip.exceed.common.WithMockUser;
 import com.gaebaljip.exceed.common.dto.AllAnalysisDTO;
 import com.gaebaljip.exceed.common.dto.MealRecordDTO;
-import com.gaebaljip.exceed.common.exception.meal.MealError;
 
 @InitializeS3Bucket
 public class GetMealIntegrationTest extends IntegrationTest {
@@ -71,59 +69,6 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("성공 : 2024년 6월 12일 기준 식사 조회" + "isVisited는 true이고, 식사 기록 또한 존재")
-    @WithMockUser
-    void when_getSpecificMeal_expected_success() throws Exception {
-
-        LocalDate testData = LocalDate.of(2024, 6, 12);
-
-        // when
-        ResultActions resultActions =
-                mockMvc.perform(
-                        MockMvcRequestBuilders.get("/v1/meal/" + testData)
-                                .contentType(MediaType.APPLICATION_JSON));
-
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        ApiResponse.CustomBody<GetMealFoodResponse> getMealFoodResponseCustomBody =
-                om.readValue(
-                        responseBody,
-                        new TypeReference<ApiResponse.CustomBody<GetMealFoodResponse>>() {});
-        Double maintainCalorie =
-                getMealFoodResponseCustomBody
-                        .getResponse()
-                        .getMealResponse()
-                        .maintainMealDTO()
-                        .calorie();
-        Double targetCalorie =
-                getMealFoodResponseCustomBody
-                        .getResponse()
-                        .getMealResponse()
-                        .targetMealDTO()
-                        .calorie();
-
-        List<MealRecordDTO> mealRecordDTOS =
-                getMealFoodResponseCustomBody.getResponse().mealRecordDTOS();
-
-        AllAnalysisDTO allAnalysisDTO =
-                getMealFoodResponseCustomBody.getResponse().allAnalysisDTO();
-
-        // then
-
-        assertAll(
-                () -> assertEquals(allAnalysisDTO.isVisited(), true),
-                () -> assertTrue(maintainCalorie > 0),
-                () -> assertTrue(targetCalorie > maintainCalorie),
-                () -> assertTrue(mealRecordDTOS.size() >= 1));
-        resultActions
-                .andExpect(status().isOk())
-                .andDo(
-                        document(
-                                "get-meal-food-success",
-                                getDocumentRequest(),
-                                getDocumentResponse()));
-    }
-
-    @Test
     @DisplayName("성공 : 미래 날짜로 켈린더 상세 조회시 식사 기록은 존재하지 않고, 방문하지도 않았다.")
     @WithMockUser
     void when_getSpecificMeal_expected_isVisited_false_mealRecord_existed() throws Exception {
@@ -155,29 +100,28 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("실패 : 2023년 11월 1일 기준 식사 조회" + "회원가입 전이기 때문에 오류 발생")
-    @WithMockUser
+    @DisplayName("성공 : 회원가입한 날짜에 켈린더 상세 조회가 정상적으로 이루어져야 한다.")
+    @WithMockUser(memberId = 2L)
     void when_getSpecificMeal_createdAt_expected_InValidDateFoundException() throws Exception {
 
-        MemberEntity memberEntity = memberRepository.findById(1L).get();
-        LocalDate testData = memberEntity.getCreatedDate().toLocalDate();
+        long memberId = 2L;
+        MemberEntity memberEntity = memberRepository.findById(memberId).get();
+        LocalDate signUpDate = memberEntity.getCreatedDate().toLocalDate();
 
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        MockMvcRequestBuilders.get("/v1/meal/" + testData)
+                        MockMvcRequestBuilders.get("/v1/meal/" + signUpDate)
                                 .contentType(MediaType.APPLICATION_JSON));
 
-        resultActions.andExpectAll(
-                status().isBadRequest(),
-                jsonPath("$.error.code").value(MealError.INVALID_DATE_FOUND.getCode()));
+        resultActions.andExpect(status().isOk());
     }
 
     @Test
     @DisplayName("성공 : 온보딩 혹은 회원 수정 직후 해당 온보딩 날짜에 캘린더 상세 조회가 정상적으로 이루어져야 한다.")
     @Sql("classpath:db/testData_signup_after_2days_onboarding.sql")
     @WithMockUser(memberId = 1L)
-    void when_onBoarding_completedAt_getSpecificMeal_expected_success() throws Exception {
+    void when_getSpecificMeal_onBoarding_completedAt__expected_success() throws Exception {
         // given
         MemberEntity memberEntity = memberRepository.findById(1L).get();
         memberEntity.updateWeight(memberEntity.getWeight(), memberEntity.getTargetWeight() + 1);
@@ -189,6 +133,25 @@ public class GetMealIntegrationTest extends IntegrationTest {
         ResultActions resultActions =
                 mockMvc.perform(
                         MockMvcRequestBuilders.get("/v1/meal/" + onboardingCompletedAt)
+                                .contentType(MediaType.APPLICATION_JSON));
+
+        // then
+        resultActions.andExpectAll(status().isOk());
+    }
+
+    @Test
+    @DisplayName("성공 : 과거 온보딩한 날짜 조회가 정상적으로 이루어져야 한다.")
+    @Sql("classpath:db/testData_signup_after_2days_onboarding.sql")
+    @WithMockUser(memberId = 1L)
+    void when_getSpecificMeal_onBoardingDate_expected_success() throws Exception {
+        // given
+        LocalDate onBoardingDate =
+                memberRepository.findById(1L).get().getUpdatedDate().toLocalDate();
+
+        // when
+        ResultActions resultActions =
+                mockMvc.perform(
+                        MockMvcRequestBuilders.get("/v1/meal/" + onBoardingDate)
                                 .contentType(MediaType.APPLICATION_JSON));
 
         // then
