@@ -22,7 +22,7 @@ public class ValidateBeforeSignupDateService implements ValidateBeforeSignUpDate
     @Transactional(readOnly = true)
     public void execute(Long memberId, LocalDateTime dateTime) {
         MemberEntity memberEntity = memberPersistenceAdapter.query(memberId);
-        if (memberEntity.checkIfBeforeSignUpDate(dateTime, memberEntity.getCreatedDate())) {
+        if (memberEntity.isBeforeSignUpDate(dateTime, memberEntity.getCreatedDate())) {
             throw InValidDateFoundException.EXECPTION;
         }
     }
