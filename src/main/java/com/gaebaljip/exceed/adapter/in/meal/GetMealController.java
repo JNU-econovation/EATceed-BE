@@ -101,6 +101,10 @@ public class GetMealController {
         if (date.equals(LocalDate.now())) {
             return LocalDateTime.now();
         }
-        return date.atStartOfDay();
+        return getLastOfDay(date);
+    }
+
+    private LocalDateTime getLastOfDay(LocalDate date) {
+        return date.atTime(23, 59, 59);
     }
 }
