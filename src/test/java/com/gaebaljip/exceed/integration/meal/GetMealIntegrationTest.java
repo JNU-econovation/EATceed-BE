@@ -196,7 +196,7 @@ public class GetMealIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("성공 : 과거 온보딩한 날짜 조회가 정상적으로 이루어져야한다.")
+    @DisplayName("성공 : 과거 온보딩한 날짜 조회가 정상적으로 이루어져야 한다.")
     @Sql("classpath:db/testData_signup_after_2days_onboarding.sql")
     @WithMockUser(memberId = 1L)
     void when_getSpecificMeal_onBoardingDate_expected_success() throws Exception {
