@@ -9,7 +9,6 @@ import com.gaebaljip.exceed.application.domain.member.Member;
 import com.gaebaljip.exceed.application.domain.member.MemberEntity;
 import com.gaebaljip.exceed.application.port.in.member.GetTargetNutritionUsecase;
 import com.gaebaljip.exceed.application.port.out.member.MemberPort;
-import com.gaebaljip.exceed.common.annotation.Timer;
 import com.gaebaljip.exceed.common.dto.TargetMealDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -35,7 +34,6 @@ public class GetTargetNutritionService implements GetTargetNutritionUsecase {
      */
     @Override
     @Transactional(readOnly = true)
-    @Timer
     public TargetMealDTO execute(Long memberId) {
         MemberEntity memberEntity = memberPort.query(memberId);
         Member member = memberConverter.toModel(memberEntity);
