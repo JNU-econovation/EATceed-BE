@@ -14,7 +14,6 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.gaebaljip.exceed.common.annotation.Timer;
 import com.gaebaljip.exceed.common.exception.EncryptionErrorException;
 
 @Component
@@ -32,11 +31,10 @@ public class Encryption {
     private SecretKeySpec secretKeySpec;
     private Cipher cipher;
 
-    @Timer
     public String encrypt(String value) {
         try {
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            byte[] valueBytes = value.getBytes(StandardCharsets.UTF_8); // String을 바이트 배열로 변환
+            byte[] valueBytes = value.getBytes(StandardCharsets.UTF_8);
             byte[] encrypted = cipher.doFinal(valueBytes);
             return Base64.getUrlEncoder().encodeToString(encrypted);
         } catch (Exception e) {
