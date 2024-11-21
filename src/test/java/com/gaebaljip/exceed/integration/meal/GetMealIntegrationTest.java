@@ -194,4 +194,25 @@ public class GetMealIntegrationTest extends IntegrationTest {
         // then
         resultActions.andExpectAll(status().isOk());
     }
+
+    @Test
+    @DisplayName("성공 : 과거 온보딩한 날짜 조회가 정상적으로 이루어져야한다.")
+    @Sql("classpath:db/testData_signup_after_2days_onboarding.sql")
+    @WithMockUser(memberId = 1L)
+    void when_getSpecificMeal_onBoardingDate_expected_success() throws Exception {
+        // given
+        MemberEntity memberEntity = memberRepository.findById(1L).get();
+        memberRepository.save(memberEntity);
+        LocalDate onBoardingDate =
+                memberRepository.findById(1L).get().getUpdatedDate().toLocalDate();
+
+        // when
+        ResultActions resultActions =
+                mockMvc.perform(
+                        MockMvcRequestBuilders.get("/v1/meal/" + onBoardingDate)
+                                .contentType(MediaType.APPLICATION_JSON));
+
+        // then
+        resultActions.andExpectAll(status().isOk());
+    }
 }
