@@ -73,6 +73,7 @@ public class MemberEntity extends BaseEntity {
     public void updateChecked() {
         this.checked = true;
     }
+
     public void updateMember(
             double height,
             Gender gender,
@@ -98,6 +99,7 @@ public class MemberEntity extends BaseEntity {
     public void updatePassword(String password) {
         this.password = password;
     }
+
     public boolean isSignUp() {
         return checked;
     }

@@ -1,9 +1,6 @@
 package com.gaebaljip.exceed.integration.meal;
 
-import static com.gaebaljip.exceed.common.util.ApiDocumentUtil.getDocumentRequest;
-import static com.gaebaljip.exceed.common.util.ApiDocumentUtil.getDocumentResponse;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
