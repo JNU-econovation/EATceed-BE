@@ -16,7 +16,7 @@ services:
   eatceed-redis:
     image: redis:alpine
     container_name: gaebaljip-local-redis
-    command: redis-server --port 6379
+    command: ["redis-server", "--requirepass", "1234"]
     ports:
       - 6379:6379
 
