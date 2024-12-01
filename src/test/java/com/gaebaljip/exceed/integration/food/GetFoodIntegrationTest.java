@@ -61,7 +61,7 @@ public class GetFoodIntegrationTest extends IntegrationTest {
         resultActions
                 .andExpectAll(
                         status().isOk(),
-                        jsonPath("$.response.foodJson[0]").value("연어구이:6968;"),
+                        jsonPath("$.response.foodJson[0]").value("연어구이:908;"),
                         jsonPath("$.response.foodJson[1]").value("연어롤:8;"))
                 .andDo(
                         document(
