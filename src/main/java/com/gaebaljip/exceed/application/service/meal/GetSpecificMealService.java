@@ -48,8 +48,7 @@ public class GetSpecificMealService implements GetSpecificMealQuery {
                                 mealEntity ->
                                         MealRecordDTO.of(
                                                 mealEntity,
-                                                presignedUrlPort.query(
-                                                        memberId, mealEntity.getId())))
+                                                presignedUrlPort.get(memberId, mealEntity.getId())))
                         .toList();
         DailyMealFoods dailyMealFoods =
                 dailyMealPort.queryMealFoods(
