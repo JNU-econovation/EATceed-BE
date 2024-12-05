@@ -63,6 +63,10 @@ public class GetSpecificMealService implements GetSpecificMealQuery {
                 .mealType(mealEntity.getMealType())
                 .time(mealEntity.getCreatedDate().toLocalTime())
                 .imageUri(presignedUrlPort.query(memberId, mealEntity.getId()))
+                .totalCalories(
+                        mealEntity.getMealFoodEntities().stream()
+                                .mapToDouble(mealFood -> mealFood.getAdjustedCalorie())
+                                .sum())
                 .foodDTOS(
                         mealEntity.getMealFoodEntities().stream()
                                 .map(

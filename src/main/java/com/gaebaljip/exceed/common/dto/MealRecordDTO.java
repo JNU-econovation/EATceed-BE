@@ -4,7 +4,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.gaebaljip.exceed.application.domain.meal.MealType;
+import com.gaebaljip.exceed.common.CustomDoubleSerializer;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -17,6 +19,7 @@ public record MealRecordDTO(
                         timezone = "Asia/Seoul")
                 LocalTime time,
         MealType mealType,
+        @JsonSerialize(using = CustomDoubleSerializer.class) Double totalCalories,
         String imageUri,
         List<FoodDTO> foodDTOS) {
 
