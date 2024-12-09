@@ -8,7 +8,7 @@ public record AnnounceDTO(
         Long announceId,
         String title,
         String content,
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
                 LocalDateTime createdDate) {
     public static AnnounceDTO of(
             Long announceId, String title, String content, LocalDateTime createdDate) {
