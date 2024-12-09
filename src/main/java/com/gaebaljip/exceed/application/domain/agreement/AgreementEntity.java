@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.gaebaljip.exceed.common.BaseEntity;
+import com.gaebaljip.exceed.common.exception.agreement.InvalidAgreementException;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -44,8 +45,25 @@ public class AgreementEntity extends BaseEntity {
     @Builder
     private AgreementEntity(
             Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
+        validateAgreement(isPrivacyPolicyAgree, isTermsServiceAgree, isOverAge);
         this.isPrivacyPolicyAgree = isPrivacyPolicyAgree;
         this.isTermsServiceAgree = isTermsServiceAgree;
         this.isOverAge = isOverAge;
+    }
+
+    private void validateAgreement(
+            Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
+        if (!isPrivacyPolicyAgree && isTermsServiceAgree && isOverAge) {
+            throw InvalidAgreementException.EXCEPTION;
+        }
+    }
+
+    public static AgreementEntity createAgreement(
+            Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
+        return AgreementEntity.builder()
+                .isPrivacyPolicyAgree(isPrivacyPolicyAgree)
+                .isTermsServiceAgree(isTermsServiceAgree)
+                .isOverAge(isOverAge)
+                .build();
     }
 }
