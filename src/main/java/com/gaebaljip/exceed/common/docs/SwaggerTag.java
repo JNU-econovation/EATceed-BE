@@ -8,4 +8,5 @@ public class SwaggerTag {
     public static final String MEMBER_MANAGEMENT = "[회원 관리]";
     public static final String MEAL = "[식사]";
     public static final String FOOD = "[음식]";
+    public static final String ANNOUNCE = "[공지사항]";
 }

@@ -107,3 +107,13 @@ CREATE TABLE `NOTIFY_TB`
     PRIMARY KEY (`NOTIFY_PK`),
     FOREIGN KEY (`MEMBER_FK`) REFERENCES `MEMBER_TB` (`MEMBER_PK`)
 ) ENGINE=InnoDB;
+
+create table ANNOUNCE_TB
+(
+    ANNOUNCE_PK bigint auto_increment
+        primary key,
+    CREATED_DATE datetime(6) not null,
+    UPDATED_DATE datetime(6) not null,
+    ANNOUNCE_CONTENT varchar(255) not null,
+    ANNOUNCE_TITLE varchar(255) not null
+);
