@@ -35,7 +35,7 @@ public class GetAgreementController {
 
     @Operation(summary = "개인 정보 처리방침 동의 여부 조회", description = "개인 정보 처리방침 여부를 조회한다.")
     @GetMapping("/agreement/privacyPolicy")
-    public ApiResponse<CustomBody<GetAnnounceResponse>> getPrivacyPolicyStatus(
+    public ApiResponse<CustomBody<GetPrivacyPolicyResponse>> getPrivacyPolicyStatus(
             @Parameter(hidden = true) @AuthenticationMemberId Long memberId) {
         GetAgreementDTO getAgreementDTO = getAgreementQuery.execute(memberId);
         return ApiResponseGenerator.success(
@@ -45,7 +45,7 @@ public class GetAgreementController {
 
     @Operation(summary = "약관 동의 여부 조회", description = "약관 동의 여부를 조회한다.")
     @GetMapping("/agreement/termService")
-    public ApiResponse<CustomBody<GetAnnounceResponse>> getTermOfServiceStatus(
+    public ApiResponse<CustomBody<GetTermsServiceAgreeResponse>> getTermOfServiceStatus(
             @Parameter(hidden = true) @AuthenticationMemberId Long memberId) {
         GetAgreementDTO getAgreementDTO = getAgreementQuery.execute(memberId);
         return ApiResponseGenerator.success(
