@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gaebaljip.exceed.adapter.in.agreement.response.GetPrivacyPolicyResponse;
 import com.gaebaljip.exceed.adapter.in.agreement.response.GetTermsServiceAgreeResponse;
-import com.gaebaljip.exceed.adapter.in.announce.response.GetAnnounceResponse;
 import com.gaebaljip.exceed.application.port.in.agreement.GetAgreementQuery;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
