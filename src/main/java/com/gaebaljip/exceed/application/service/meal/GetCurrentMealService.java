@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gaebaljip.exceed.application.domain.meal.DailyMealFoods;
 import com.gaebaljip.exceed.application.port.in.meal.GetCurrentMealQuery;
 import com.gaebaljip.exceed.application.port.out.meal.DailyMealPort;
-import com.gaebaljip.exceed.common.annotation.Timer;
 import com.gaebaljip.exceed.common.dto.CurrentMealDTO;
 import com.gaebaljip.exceed.common.dto.DailyMealDTO;
 import com.gaebaljip.exceed.common.exception.meal.NotSameDateException;
@@ -36,7 +35,6 @@ public class GetCurrentMealService implements GetCurrentMealQuery {
      */
     @Override
     @Transactional(readOnly = true)
-    @Timer
     public CurrentMealDTO execute(Long memberId) {
         DailyMealFoods dailyMealFoods =
                 dailyMealPort.queryMealFoodsForDay(new DailyMealDTO(memberId, LocalDateTime.now()));

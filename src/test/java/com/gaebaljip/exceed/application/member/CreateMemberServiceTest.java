@@ -14,7 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.gaebaljip.exceed.adapter.in.member.request.SignUpMemberRequest;
+import com.gaebaljip.exceed.application.domain.agreement.AgreementEntity;
 import com.gaebaljip.exceed.application.domain.member.MemberEntity;
+import com.gaebaljip.exceed.application.port.out.agreement.AgreementPort;
 import com.gaebaljip.exceed.application.port.out.member.MemberPort;
 import com.gaebaljip.exceed.application.service.member.CreateMemberService;
 
@@ -22,6 +24,7 @@ import com.gaebaljip.exceed.application.service.member.CreateMemberService;
 class CreateMemberServiceTest {
 
     @Mock private MemberPort memberPort;
+    @Mock private AgreementPort agreementPort;
     @Mock private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @InjectMocks private CreateMemberService createMemberService;
@@ -33,7 +36,7 @@ class CreateMemberServiceTest {
     void when_NotExistEmail_then_CreateMember() {
         // given
         SignUpMemberRequest signUpMemberRequest =
-                new SignUpMemberRequest(getEmail(), getPassword());
+                new SignUpMemberRequest(getEmail(), getPassword(), true, true, true);
         given(memberPort.existsByEmail(anyString())).willReturn(false);
 
         // when
@@ -41,6 +44,7 @@ class CreateMemberServiceTest {
 
         // then
         verify(memberPort).command(any(MemberEntity.class));
+        verify(agreementPort).command(any(AgreementEntity.class));
         verify(bCryptPasswordEncoder).encode(anyString());
     }
 

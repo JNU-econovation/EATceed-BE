@@ -20,7 +20,7 @@ public class UploadImageService implements UploadImageUsecase {
     @Override
     public String execute(UploadImageCommand uploadImageCommand) {
         validateExt(uploadImageCommand.fileName());
-        return presignedUrlPort.command(
+        return presignedUrlPort.put(
                 uploadImageCommand.memberId(),
                 uploadImageCommand.mealId(),
                 uploadImageCommand.fileName());

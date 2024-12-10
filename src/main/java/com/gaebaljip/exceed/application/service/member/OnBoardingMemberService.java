@@ -73,6 +73,6 @@ public class OnBoardingMemberService implements OnBoardingMemberUsecase {
     @Override
     public boolean checkOnBoarding(OnBoardingMemberQuery query) {
         MemberEntity memberEntity = memberPort.query(query.memberId());
-        return memberEntity.checkOnBoarding();
+        return memberEntity.isOnBoarding();
     }
 }

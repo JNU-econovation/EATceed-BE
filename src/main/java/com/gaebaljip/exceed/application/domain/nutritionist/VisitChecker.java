@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.gaebaljip.exceed.application.domain.meal.DailyMealFoods;
-import com.gaebaljip.exceed.common.annotation.Timer;
 
 /**
  * 특정 기간의 식사 여부를 확인
@@ -20,7 +19,6 @@ public class VisitChecker {
         this.mealFoodsByDate = mealFoodsByDate;
     }
 
-    @Timer
     public Map<LocalDate, Boolean> check() {
         Map<LocalDate, Boolean> dateVisitStatus = new HashMap<>();
         mealFoodsByDate.keySet().stream()

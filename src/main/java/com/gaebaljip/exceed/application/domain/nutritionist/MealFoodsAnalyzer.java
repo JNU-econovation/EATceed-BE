@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.gaebaljip.exceed.application.domain.meal.DailyMealFoods;
 import com.gaebaljip.exceed.application.domain.member.Member;
-import com.gaebaljip.exceed.common.annotation.Timer;
 import com.gaebaljip.exceed.common.exception.member.MemberNotFoundException;
 import com.gaebaljip.exceed.common.exception.nutritionist.MinimumMemberRequiredException;
 
@@ -27,7 +26,6 @@ public class MealFoodsAnalyzer {
         this.members = members;
     }
 
-    @Timer
     public Map<LocalDate, Boolean> isCalorieAchievementByDate() {
         Map<LocalDate, Boolean> calorieAchievements = new HashMap<>();
         mealFoodsByDate.entrySet().stream()

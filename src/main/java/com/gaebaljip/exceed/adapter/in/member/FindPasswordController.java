@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.gaebaljip.exceed.adapter.in.member.request.FindPasswordRequest;
 import com.gaebaljip.exceed.adapter.in.member.request.SendEmailRequest;
 import com.gaebaljip.exceed.application.port.in.member.CheckCodeUsecase;
-import com.gaebaljip.exceed.application.port.in.member.GetCodeUsecase;
-import com.gaebaljip.exceed.application.port.in.member.PasswordValidationUsecase;
+import com.gaebaljip.exceed.application.port.in.member.CheckSignUpMemberUsecase;
 import com.gaebaljip.exceed.application.port.in.member.UpdatePasswordUsecase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
@@ -31,8 +30,7 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = SwaggerTag.ACCOUNT_MANAGEMENT)
 public class FindPasswordController {
 
-    private final PasswordValidationUsecase passwordValidationUsecase;
-    private final GetCodeUsecase getCodeUsecase;
+    private final CheckSignUpMemberUsecase checkSignUpMemberUsecase;
 
     @Value("${exceed.deepLink.updatePassword}")
     private String deepLink;
@@ -45,19 +43,16 @@ public class FindPasswordController {
             description = "비밀번호 찾기 전, 이메일 검증 및 이메일을 재전송한다.")
     @PostMapping("/email")
     @ApiErrorExceptionsExample(FindPassword_validateEmailExceptionDocs.class)
-    public ApiResponse<CustomBody<Void>> validateEmail(
+    public ApiResponse<CustomBody<Void>> checkSignUpMember(
             @RequestBody @Valid SendEmailRequest request) {
-        passwordValidationUsecase.execute(request.email());
+        checkSignUpMemberUsecase.execute(request.email());
         return ApiResponseGenerator.success(HttpStatus.OK);
     }
 
     @Operation(summary = "링크 클릭시 리다이렉트", description = "AOS는 몰라도 되는 API")
     @GetMapping("/findPassword-redirect")
-    public void redirect(@RequestParam String email, HttpServletResponse response) {
-        StringBuilder sb = new StringBuilder();
-        String code = getCodeUsecase.execute(email);
-        String redirectUrl = sb.append(deepLink).append("?code=").append(code).toString();
-        response.setHeader("Location", redirectUrl);
+    public void redirect(HttpServletResponse response) {
+        response.setHeader("Location", deepLink);
         response.setStatus(302);
     }
 

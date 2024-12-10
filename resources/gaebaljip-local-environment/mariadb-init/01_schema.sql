@@ -17,7 +17,19 @@ CREATE TABLE `MEMBER_TB`
     `MEMBER_WEIGHT`   double       DEFAULT NULL,
     `MEMBER_TARGET_WEIGHT`   double       DEFAULT NULL,
     `MEMBER_CHECKED`  bit(1)       NOT NULL DEFAULT 0,
+    `AGREEMENT_FK`    bigint(20)   NOT NULL,
     PRIMARY KEY (`MEMBER_PK`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `AGREEMENT_TB`
+(
+    `AGREEMENT_PK` bigint(20) NOT NULL AUTO_INCREMENT,
+    `CREATED_DATE`    datetime(6)  NOT NULL,
+    `UPDATED_DATE`    datetime(6)  NOT NULL,
+    `AGREEMENT_IS_PRIVACY_POLICY_AGREE` tinyint NOT NULL,
+    `AGREEMENT_IS_TERMS_SERVICE_AGREE` tinyint NOT NULL,
+    `AGREEMENT_IS_OVER_AGE` tinyint NOT NULL,
+    PRIMARY KEY (`AGREEMENT_PK`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `FOOD_TB`
@@ -107,3 +119,13 @@ CREATE TABLE `NOTIFY_TB`
     PRIMARY KEY (`NOTIFY_PK`),
     FOREIGN KEY (`MEMBER_FK`) REFERENCES `MEMBER_TB` (`MEMBER_PK`)
 ) ENGINE=InnoDB;
+
+create table ANNOUNCE_TB
+(
+    ANNOUNCE_PK bigint auto_increment
+        primary key,
+    CREATED_DATE datetime(6) not null,
+    UPDATED_DATE datetime(6) not null,
+    ANNOUNCE_CONTENT varchar(255) not null,
+    ANNOUNCE_TITLE varchar(255) not null
+);

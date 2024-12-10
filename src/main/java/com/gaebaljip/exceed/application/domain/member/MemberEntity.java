@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import com.gaebaljip.exceed.adapter.out.jpa.member.GenderConvert;
+import com.gaebaljip.exceed.application.domain.agreement.AgreementEntity;
 import com.gaebaljip.exceed.common.BaseEntity;
 
 import lombok.*;
@@ -66,16 +67,21 @@ public class MemberEntity extends BaseEntity {
     @Column(name = ENTITY_PREFIX + "_TARGET_WEIGHT")
     private Double targetWeight;
 
-    public static MemberEntity createMember(String email, String password) {
-        return MemberEntity.builder().email(email).password(password).build();
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AGREEMENT_FK", nullable = false)
+    private AgreementEntity agreementEntity;
+
+    public static MemberEntity createMember(
+            String email, String password, AgreementEntity agreementEntity) {
+        return MemberEntity.builder()
+                .email(email)
+                .password(password)
+                .agreementEntity(agreementEntity)
+                .build();
     }
 
     public void updateChecked() {
         this.checked = true;
-    }
-
-    public boolean isSignUp() {
-        return checked;
     }
 
     public void updateMember(
@@ -104,7 +110,11 @@ public class MemberEntity extends BaseEntity {
         this.password = password;
     }
 
-    public boolean checkOnBoarding() {
+    public boolean isSignUp() {
+        return checked;
+    }
+
+    public boolean isOnBoarding() {
         return this.getWeight() != null
                 && this.getHeight() != null
                 && this.getAge() != null
@@ -113,12 +123,11 @@ public class MemberEntity extends BaseEntity {
                 && this.getTargetWeight() != null;
     }
 
-    public boolean checkIfBeforeSignUpDate(
-            LocalDateTime checkDateTime, LocalDateTime comparisonDate) {
-        return checkDateTime.isBefore(comparisonDate);
+    public boolean isBeforeSignUpDate(LocalDateTime checkDateTime, LocalDateTime createdAt) {
+        return checkDateTime.isBefore(createdAt);
     }
 
-    public boolean checkIfBeforeSignUpMonth(LocalDate checkDate, LocalDateTime createdDateTime) {
+    public boolean isBeforeSignUpMonth(LocalDate checkDate, LocalDateTime createdDateTime) {
         LocalDate comparisonDate = createdDateTime.toLocalDate().withDayOfMonth(1);
         return checkDate.isBefore(comparisonDate);
     }
