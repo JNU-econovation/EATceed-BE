@@ -66,4 +66,12 @@ public class AgreementEntity extends BaseEntity {
                 .isOverAge(isOverAge)
                 .build();
     }
+
+    public void agreePrivacyPolicy(boolean isPrivacyPolicyAgree) {
+        this.isPrivacyPolicyAgree = isPrivacyPolicyAgree;
+    }
+
+    public void agreeTermsService(boolean isTermsServiceAgree) {
+        this.isTermsServiceAgree = isTermsServiceAgree;
+    }
 }
