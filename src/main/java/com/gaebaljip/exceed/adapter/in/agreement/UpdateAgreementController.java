@@ -15,6 +15,8 @@ import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
 import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
 import com.gaebaljip.exceed.common.docs.SwaggerTag;
+import com.gaebaljip.exceed.common.docs.agreement.AgreePrivacyPolicyDocs;
+import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -34,6 +36,7 @@ public class UpdateAgreementController {
 
     @Operation(summary = "개인 정보 처리방침 동의", description = "개인 정보 처리방침을 동의한다.")
     @PatchMapping("/agreement/privacyPolicy")
+    @ApiErrorExceptionsExample(AgreePrivacyPolicyDocs.class)
     public ApiResponse<CustomBody<Void>> agreePrivacyPolicy(
             @RequestBody @Valid AgreePrivacyPolicyRequest request,
             @Parameter(hidden = true) @AuthenticationMemberId Long memberId) {
