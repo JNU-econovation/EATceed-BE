@@ -3,6 +3,7 @@ package com.gaebaljip.exceed.common.docs.member;
 import com.gaebaljip.exceed.common.exception.DecryptionErrorException;
 import com.gaebaljip.exceed.common.exception.EatCeedException;
 import com.gaebaljip.exceed.common.exception.EncryptionErrorException;
+import com.gaebaljip.exceed.common.exception.agreement.InvalidAgreementException;
 import com.gaebaljip.exceed.common.exception.member.AlreadySignUpMemberException;
 import com.gaebaljip.exceed.common.exception.member.EmailNotVerifiedException;
 import com.gaebaljip.exceed.common.exception.member.MailSendException;
@@ -27,4 +28,7 @@ public class SignUpMemberExceptionDocs implements SwaggerExampleExceptions {
 
     @ExplainError("메일 전송 실패 시")
     public EatCeedException 메일_전송_실패_시 = MailSendException.EXECPTION;
+
+    @ExplainError("약관, 개인 정보 처리방침, 14세 이상을 동의하지 않을 시")
+    public EatCeedException 약관_개인_정보_처리방침_14세_이상을_동의하지_않을_시 = InvalidAgreementException.EXCEPTION;
 }

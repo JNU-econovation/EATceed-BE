@@ -9,4 +9,5 @@ public class SwaggerTag {
     public static final String MEAL = "[식사]";
     public static final String FOOD = "[음식]";
     public static final String ANNOUNCE = "[공지사항]";
+    public static final String AGREEMENT = "[약관 및 개인 정보 처리방침]";
 }

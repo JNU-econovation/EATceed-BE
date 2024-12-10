@@ -1,26 +1,37 @@
+INSERT INTO AGREEMENT_TB (AGREEMENT_PK, CREATED_DATE, UPDATED_DATE, AGREEMENT_IS_PRIVACY_POLICY_AGREE, AGREEMENT_IS_TERMS_SERVICE_AGREE, AGREEMENT_IS_OVER_AGE)
+VALUES (1, '2023-11-01 08:00:00', '2023-11-01 08:00:00', true, true, true),
+       (2, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
+       (3, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
+       (4, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
+       (5, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
+       (6, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
+       (7, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
+       (8, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
+       (9, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
+       (10, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true);
 
 INSERT INTO MEMBER_TB (MEMBER_PK, CREATED_DATE, UPDATED_DATE, MEMBER_ACTIVITY, MEMBER_AGE, MEMBER_ETC, MEMBER_GENDER,
-                       MEMBER_HEIGHT, MEMBER_WEIGHT, MEMBER_TARGET_WEIGHT, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_ROLE, MEMBER_CHECKED)
+                       MEMBER_HEIGHT, MEMBER_WEIGHT, MEMBER_TARGET_WEIGHT, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_ROLE, MEMBER_CHECKED, AGREEMENT_FK)
 VALUES (1, '2023-11-01 08:00:00', '2024-07-02 09:00:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 175.0, 76.0, 78.0, 'abcd123!@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.0Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.0Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 1),
        (2, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 178.0, 72.0, 79.0, 'abcd234@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.2Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.2Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 2),
        (3, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 165.0, 60.0, 78.0, 'abcd345@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.3Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.3Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 3),
        (4, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 180.0, 75.0, 82.0, 'abcd456@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.4Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.4Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 4),
        (5, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 170.0, 68.0, 75.0, 'abcd567@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.5Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.5Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 5),
        (6, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 177.0, 71.0, 77.0, 'abcd678@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.6Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.6Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 6),
        (7, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 169.0, 69.0, 74.0, 'abcd789@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.7Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.7Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 7),
        (8, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 181.0, 74.0, 90.0, 'abcd890@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.8Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.8Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 8),
        (9, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 168.0, 65.0, 72.0, 'abcd901@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.9Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true),
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.9Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 9),
        (10, '2023-12-01 08:00:00', '2023-12-01 08:10:00', 'NOT_ACTIVE', 30, '비고 없음', 1, 172.0, 66.0, 73.0, 'abcd012@@gmail.com',
-        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.0Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true);
+        '$2a$10$pljAKl0Ad3LnjQyQei.Yz.0Cfcn3Zv/xeBMDwUHDaUrfG8Wm57c56', 'MEMBER', true, 10);
 
 
 INSERT INTO HISTORY_TB(HISTORY_PK, CREATED_DATE, UPDATED_DATE, HISTORY_ACTIVITY,HISTORY_AGE,HISTORY_GENDER,HISTORY_HEIGHT, HISTORY_WEIGHT, HISTORY_TARGET_WEIGHT ,MEMBER_FK)
