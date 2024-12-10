@@ -1,5 +1,6 @@
 package com.gaebaljip.exceed.application.service.agreement;
 
+import com.gaebaljip.exceed.application.domain.agreement.AgreementEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +19,9 @@ public class AgreePrivacyPolicyService implements AgreePrivacyPolicyUsecase {
     @Override
     @Transactional
     public void execute(Long memberId, boolean isPrivacyPolicyAgree) {
-        MemberEntity memberEntity = memberPort.query(memberId);
         validatePrivacyPolicyAgree(isPrivacyPolicyAgree);
-        memberEntity.getAgreementEntity().agreePrivacyPolicy(isPrivacyPolicyAgree);
+        AgreementEntity agreementEntity = memberPort.query(memberId).getAgreementEntity();
+        agreementEntity.agreePrivacyPolicy(isPrivacyPolicyAgree);
     }
 
     private void validatePrivacyPolicyAgree(boolean isPrivacyPolicyAgree) {
