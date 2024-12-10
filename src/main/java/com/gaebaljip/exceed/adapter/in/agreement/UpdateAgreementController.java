@@ -18,6 +18,7 @@ import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
 import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.agreement.AgreePrivacyPolicyDocs;
+import com.gaebaljip.exceed.common.docs.agreement.AgreeTermsServiceDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,6 +51,7 @@ public class UpdateAgreementController {
 
     @Operation(summary = "약관 동의", description = "약관을 동의한다.")
     @PatchMapping("/agreement/termService")
+    @ApiErrorExceptionsExample(AgreeTermsServiceDocs.class)
     public ApiResponse<CustomBody<Void>> agreeTermOfService(
             @RequestBody @Valid AgreeTermsServiceRequest request,
             @Parameter(hidden = true) @AuthenticationMemberId Long memberId) {
