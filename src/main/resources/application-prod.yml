@@ -120,3 +120,5 @@ org:
         user: ${RDS_DATABASE_USERNAME}
         password: ${RDS_DATABASE_PASSWORD}
         maxConnections: 30
+
+app.version: ${APP_VERSION}
