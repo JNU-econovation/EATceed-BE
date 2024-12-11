@@ -23,6 +23,7 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - SCHEDULER_NUTRITION_CACHE_UPDATE=${SCHEDULER_NUTRITION_CACHE_UPDATE}
+      - APP_VERSION=${APP_VERSION}
     networks:
       - gaebaljip-network
     restart:  "always"
