@@ -125,3 +125,6 @@ org:
         user: root
         password: root
         maxConnections: 30
+
+app.version: 1.0.0
+

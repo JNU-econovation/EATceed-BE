@@ -65,3 +65,4 @@ logging:
       springframework:
         test.context.cache: debug
 
+app.version: 1.0.0

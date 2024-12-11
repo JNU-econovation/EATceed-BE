@@ -120,3 +120,5 @@ org:
         user: ${SPRING_DATASOURCE_USERNAME}
         password: ${SPRING_DATASOURCE_PASSWORD}
         maxConnections: 30
+
+app.version: ${APP_VERSION}
