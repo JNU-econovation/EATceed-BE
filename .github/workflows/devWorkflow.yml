@@ -4,8 +4,7 @@ on:
   pull_request:
     branches:
       - develop
-    types:
-      - [opened, edited]
+    types: [opened, edited]
 
 jobs:
   build:
