@@ -1,10 +1,9 @@
 name: testAndDeploy_dev
 
 on:
-  push:
-    branches:
-      - develop
   pull_request:
+    types:
+      - [opened, edited]
     branches:
       - develop
 
