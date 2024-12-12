@@ -2,10 +2,10 @@ name: testAndDeploy_dev
 
 on:
   pull_request:
-    types:
-      - [opened, edited]
     branches:
       - develop
+    types:
+      - [opened, edited]
 
 jobs:
   build:
