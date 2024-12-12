@@ -20,7 +20,7 @@ class MemberEntityTest {
         LocalDateTime createdDateTime = LocalDateTime.of(2024, 7, 23, 12, 33);
 
         // when && then
-        Assertions.assertTrue(memberEntity.checkIfBeforeSignUpMonth(checkDate, createdDateTime));
+        Assertions.assertTrue(memberEntity.isBeforeSignUpMonth(checkDate, createdDateTime));
     }
 
     @Test
@@ -32,6 +32,6 @@ class MemberEntityTest {
         LocalDateTime createdDateTime = LocalDateTime.of(2024, 7, 23, 12, 33);
 
         // when && then
-        Assertions.assertFalse(memberEntity.checkIfBeforeSignUpMonth(checkDate, createdDateTime));
+        Assertions.assertFalse(memberEntity.isBeforeSignUpMonth(checkDate, createdDateTime));
     }
 }

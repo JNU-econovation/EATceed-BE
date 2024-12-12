@@ -1,21 +1,10 @@
 version: '3'
 services:
-  eatceed-redis:
-    image: redis:alpine
-    container_name: gaebaljip-redis
-    command: redis-server --port 6379
-    expose:
-      - "6379"
-    networks:
-      - gaebaljip-network
-
   eatceed-backend:
     image: hwangdaesun/gaebaljip-prod:latest
     container_name: gaebaljip-spring
     ports:
       - 8080:8080
-    depends_on:
-      - eatceed-redis
     environment:
       - RDS_DATABASE_ENDPOINT=${RDS_DATABASE_ENDPOINT}
       - RDS_PORT=${RDS_PORT}
@@ -30,9 +19,11 @@ services:
       - ENCRYPTION_SPEC=${ENCRYPTION_SPEC}
       - ENCRYPTION_SECRET=${ENCRYPTION_SECRET}
       - ENCRYPTION_ALGORITHM=${ENCRYPTION_ALGORITHM}
-      - SPRING_REDIS_HOST=gaebaljip-redis
-      - SPRING_REDIS_PORT=6379
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - SCHEDULER_NUTRITION_CACHE_UPDATE=${SCHEDULER_NUTRITION_CACHE_UPDATE}
+      - APP_VERSION=${APP_VERSION}
     networks:
       - gaebaljip-network
     restart:  "always"

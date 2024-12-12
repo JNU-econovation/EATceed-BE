@@ -6,7 +6,6 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import com.gaebaljip.exceed.application.port.out.member.EmailPort;
-import com.gaebaljip.exceed.common.annotation.Timer;
 
 import lombok.RequiredArgsConstructor;
 import software.amazon.awssdk.services.ses.SesAsyncClient;
@@ -23,7 +22,6 @@ public class EmailAdapter implements EmailPort {
     private final SpringTemplateEngine htmlTemplateEngine;
 
     @Override
-    @Timer
     public void sendEmail(String to, String title, String template, Context context) {
 
         String html = htmlTemplateEngine.process(template, context);

@@ -5,8 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gaebaljip.exceed.application.port.in.member.CheckCodeUsecase;
 import com.gaebaljip.exceed.application.port.out.member.CodePort;
-import com.gaebaljip.exceed.common.Encryption;
-import com.gaebaljip.exceed.common.annotation.Timer;
 import com.gaebaljip.exceed.common.exception.member.ExpiredCodeException;
 
 import lombok.RequiredArgsConstructor;
@@ -15,15 +13,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CheckCodeService implements CheckCodeUsecase {
 
-    private final Encryption encryption;
     private final CodePort codePort;
 
     @Override
     @Transactional
-    @Timer
-    public void execute(String email, String encrypt) {
-        String code = codePort.query(email).orElseThrow(() -> ExpiredCodeException.EXECPTION);
-        String decrypt = encryption.decrypt(encrypt);
-        encryption.match(decrypt, code);
+    public void execute(String email, String rawCode) {
+        String validCode = codePort.query(email).orElseThrow(() -> ExpiredCodeException.EXECPTION);
+        if (!validCode.equals(rawCode)) {
+            throw ExpiredCodeException.EXECPTION;
+        }
     }
 }

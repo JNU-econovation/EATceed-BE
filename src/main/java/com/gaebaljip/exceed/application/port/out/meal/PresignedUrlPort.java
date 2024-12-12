@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface PresignedUrlPort {
-    String query(Long mealId, Long memberId);
+    String get(Long mealId, Long memberId);
 
-    String command(Long memberId, Long mealId, String fileName);
+    String put(Long memberId, Long mealId, String fileName);
 }

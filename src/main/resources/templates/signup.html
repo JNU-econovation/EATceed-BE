@@ -1,15 +1,91 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Eatceed 이메일 인증</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이메일 인증</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center; /* 전체 중앙 정렬 */
+        }
+        .email-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+        .email-body {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555555;
+            margin-bottom: 20px;
+        }
+        .authcode-container {
+            margin: 20px 0;
+        }
+        .authcode-box {
+            background-color: #f4f4f4;
+            color: #1e7d1e; /* 초록색 텍스트 */
+            padding: 10px 20px; /* 텍스트 좌우 여백 */
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .email-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block; /* 링크도 중앙 정렬 */
+        }
+        .email-footer {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<h2>이메일 인증</h2>
-<p>안녕하세요 체중 증량 어플 Eatceed입니다.</p>
-<p>아래의 링크를 통해 이메일 주소를 인증해주세요. 인증되면 회원가입이 완료됩니다.</p>
-<p>인증을 요청하지 않았다면, 이 이메일을 무시하셔도 됩니다.</p>
-<a th:href="${signupLink} + ${email}">이메일 인증 링크</a>
-<link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;," >
+<div class="email-container">
+    <!-- 헤더 -->
+    <div class="email-header">이메일 인증</div>
+
+    <!-- 본문 -->
+    <div class="email-body">
+        안녕하세요 체중 증량 어플 <strong>Eatceed</strong>입니다.<br><br>
+        아래의 링크를 통해 인증 코드를 입력해주세요. 인증되면 회원가입이 완료됩니다.
+    </div>
+
+    <!-- 인증 코드 -->
+    <div class="authcode-container">
+        <div class="authcode-box" th:text="${code}">인증 코드</div> <!-- 인증 코드 값 표시 -->
+    </div>
+
+    <!-- 인증 링크 -->
+    <div class="email-body">
+        <a th:href="${signupLink}" class="email-link">이메일 인증 링크</a> <!-- 인증 링크 동적 적용 -->
+    </div>
+
+    <!-- 푸터 -->
+    <div class="email-footer">
+        인증을 요청하지 않았다면, 이 이메일을 무시하셔도 됩니다.
+    </div>
+</div>
 </body>
 </html>

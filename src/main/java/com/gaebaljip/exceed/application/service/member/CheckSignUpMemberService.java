@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gaebaljip.exceed.application.domain.member.MemberEntity;
-import com.gaebaljip.exceed.application.port.in.member.PasswordValidationUsecase;
+import com.gaebaljip.exceed.application.port.in.member.CheckSignUpMemberUsecase;
 import com.gaebaljip.exceed.application.port.out.member.MemberPort;
 import com.gaebaljip.exceed.common.annotation.EventPublisherStatus;
 import com.gaebaljip.exceed.common.event.Events;
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class PasswordValidationService implements PasswordValidationUsecase {
+public class CheckSignUpMemberService implements CheckSignUpMemberUsecase {
 
     private final MemberPort memberPort;
 

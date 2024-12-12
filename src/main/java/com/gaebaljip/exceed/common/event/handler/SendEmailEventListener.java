@@ -31,16 +31,23 @@ public class SendEmailEventListener {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Async
     public void handle(SendEmailEvent event) {
-        codePort.saveWithExpiration(event.getEmail(), Code.create(), expiredTime);
+        int randomCode = createRandom();
+        codePort.saveWithExpiration(event.getEmail(), String.valueOf(randomCode), expiredTime);
         Context context = new Context();
         context.setVariable(
                 MailTemplate.FIND_PASSWORD_MAIL_CONTEXT,
                 URL + MailTemplate.REPLY_TO_FIND_PASSWORD_MAIL_URL);
-        context.setVariable(MailTemplate.FIND_PASSWORD_EMAIL, "?email=" + event.getEmail());
+        context.setVariable(MailTemplate.FIND_PASSWORD_CODE, randomCode);
         emailPort.sendEmail(
                 event.getEmail(),
                 MailTemplate.FIND_PASSWORD_TITLE,
                 MailTemplate.FIND_PASSWORD_TEMPLATE,
                 context);
+    }
+
+    private int createRandom() {
+        Code code = new Code();
+        int random = code.createRandom();
+        return random;
     }
 }

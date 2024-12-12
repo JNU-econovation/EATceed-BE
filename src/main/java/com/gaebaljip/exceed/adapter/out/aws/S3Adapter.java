@@ -26,7 +26,7 @@ public class S3Adapter implements PresignedUrlPort {
     public static final String CONTENT_TYPE_PREFIX = "image/";
 
     @Override
-    public String query(Long memberId, Long mealId) {
+    public String get(Long memberId, Long mealId) {
         GetObjectRequest getObjectRequest =
                 GetObjectRequest.builder().bucket(bucketName).key(memberId + "_" + mealId).build();
         GetObjectPresignRequest presignRequest =
@@ -39,7 +39,7 @@ public class S3Adapter implements PresignedUrlPort {
     }
 
     @Override
-    public String command(Long memberId, Long mealId, String fileName) {
+    public String put(Long memberId, Long mealId, String fileName) {
         PutObjectRequest putObjectRequest =
                 PutObjectRequest.builder()
                         .bucket(bucketName)

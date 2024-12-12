@@ -34,35 +34,35 @@ public class Member {
         }
     }
 
-    public double measureMaintainCarbohydrate() {
-        return measureBMR() / 5;
-    }
-
-    public double measureMaintainProtein() {
-        return measureBMR() / 3;
-    }
-
-    public double measureMaintainFat() {
-        return measureBMR() / 2;
-    }
-
     public double measureTDEE() {
         return measureBMR() * activity.getValue();
     }
 
-    public double measureTargetCarbohydrate() {
-        return measureTargetCalorie() / 5;
+    public double measureMaintainCarbohydrate() {
+        return measureTDEE() * 0.5 / 4;
     }
 
-    public double measureTargetProtein() {
-        return measureTargetCalorie() / 3;
+    public double measureMaintainProtein() {
+        return measureTDEE() * 0.2 / 4;
     }
 
-    public double measureTargetFat() {
-        return measureTargetCalorie() / 2;
+    public double measureMaintainFat() {
+        return measureTDEE() * 0.3 / 9;
     }
 
     public double measureTargetCalorie() {
         return measureTDEE() + 500;
+    }
+
+    public double measureTargetCarbohydrate() {
+        return measureTargetCalorie() * 0.5 / 4;
+    }
+
+    public double measureTargetProtein() {
+        return measureTargetCalorie() * 0.2 / 4;
+    }
+
+    public double measureTargetFat() {
+        return measureTargetCalorie() * 0.3 / 9;
     }
 }
