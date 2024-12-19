@@ -11,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
 
+import com.gaebaljip.exceed.common.helper.SpringEnvironmentHelper;
 import com.gaebaljip.exceed.common.security.domain.JwtManager;
 import com.gaebaljip.exceed.common.security.domain.JwtResolver;
 import com.gaebaljip.exceed.common.security.exception.JwtAccessDeniedHandler;
@@ -29,6 +30,7 @@ public class SecurityConfig {
     private final MemberDetailService memberDetailService;
     private final JwtAuthenticationPoint jwtAuthenticationPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final SpringEnvironmentHelper springEnvironmentHelper;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -77,12 +79,22 @@ public class SecurityConfig {
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/v1/auth/login", "/v1/auth/refresh")
                 .permitAll()
+                .antMatchers(
+                        "/swagger-resources/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/v3/api-docs/**",
+                        "/v3/api-docs",
+                        "/api-docs/**",
+                        "/api-docs")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
 
         // jwt filter 설정
         http.addFilterBefore(
-                new JwtAuthenticationFilter(jwtManager, jwtResolver, memberDetailService),
+                new JwtAuthenticationFilter(
+                        jwtManager, jwtResolver, memberDetailService, springEnvironmentHelper),
                 UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
@@ -91,16 +103,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) ->
                 web.ignoring()
-                        .antMatchers("/docs/api-doc.html")
                         .antMatchers("/favicon.*", "/*/icon-*")
-                        .antMatchers(
-                                "/swagger-resources/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html",
-                                "/v3/api-docs/**",
-                                "/v3/api-docs",
-                                "/api-docs/**",
-                                "/api-docs")
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 }
