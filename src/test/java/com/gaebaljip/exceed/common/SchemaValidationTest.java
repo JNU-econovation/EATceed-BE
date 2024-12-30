@@ -1,36 +1,37 @@
-//package com.gaebaljip.exceed.common;
+// package com.gaebaljip.exceed.common;
 //
-//import java.io.IOException;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
-//import java.sql.Connection;
-//import java.sql.SQLException;
-//import java.sql.Statement;
+// import java.io.IOException;
+// import java.nio.file.Files;
+// import java.nio.file.Paths;
+// import java.sql.Connection;
+// import java.sql.SQLException;
+// import java.sql.Statement;
 //
-//import org.junit.jupiter.api.AfterAll;
-//import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-//import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-//import org.springframework.context.annotation.Import;
-//import org.springframework.test.context.DynamicPropertyRegistry;
-//import org.springframework.test.context.DynamicPropertySource;
-//import org.testcontainers.containers.GenericContainer;
-//import org.testcontainers.containers.MariaDBContainer;
-//import org.testcontainers.utility.DockerImageName;
+// import org.junit.jupiter.api.AfterAll;
+// import org.junit.jupiter.api.BeforeAll;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+// import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+// import org.springframework.context.annotation.Import;
+// import org.springframework.test.context.DynamicPropertyRegistry;
+// import org.springframework.test.context.DynamicPropertySource;
+// import org.testcontainers.containers.GenericContainer;
+// import org.testcontainers.containers.MariaDBContainer;
+// import org.testcontainers.utility.DockerImageName;
 //
-//import com.gaebaljip.exceed.config.QueryDslConfig;
+// import com.gaebaljip.exceed.config.QueryDslConfig;
 //
-//@DataJpaTest(properties = "spring.jpa.hibernate.ddl-auto=validate")
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-//@Import(QueryDslConfig.class)
-//public class SchemaValidationTest {
+// @DataJpaTest(properties = "spring.jpa.hibernate.ddl-auto=validate")
+// @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+// @Import(QueryDslConfig.class)
+// public class SchemaValidationTest {
 //
 //    private static MariaDBContainer<?> schemaValidationMariaDB;
 //    private static GenericContainer<?> redisContainer;
 //
 //    private static String getAbsolutePath() {
-//        String relativePath = "resources/gaebaljip-develop-environment/mariadb-init/01_schema.sql";
+//        String relativePath =
+// "resources/gaebaljip-develop-environment/mariadb-init/01_schema.sql";
 //        String currentDir = System.getProperty("user.dir");
 //        return Paths.get(currentDir, relativePath).normalize().toAbsolutePath().toString();
 //    }
@@ -92,4 +93,4 @@
 //
 //    @Test
 //    public void testSchemaValidity() {}
-//}
+// }
