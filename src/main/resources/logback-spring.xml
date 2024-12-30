@@ -20,6 +20,7 @@
             </layout>
         </encoder>
     </appender>
+
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="com.gaebaljip.exceed.common.log.MaskingPatternLayout">
@@ -41,6 +42,7 @@
             <totalSizeCap>100MB</totalSizeCap>
         </rollingPolicy>
     </appender>
+
 
     <springProfile name="local">
         <logger name="com.gaebaljip.exceed" level="DEBUG" />
