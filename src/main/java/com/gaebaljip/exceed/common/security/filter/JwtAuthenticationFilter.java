@@ -46,6 +46,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // prod 환경에서 swagger 요청을 차단
         if (Boolean.TRUE.equals(springEnvironmentHelper.isProdProfile())
                 && isSwaggerRequest(request)) {
+            request.setAttribute(
+                    "swaggerCannotProdException", SwaggerCannotProdException.EXCEPTION);
             throw SwaggerCannotProdException.EXCEPTION;
         }
 
