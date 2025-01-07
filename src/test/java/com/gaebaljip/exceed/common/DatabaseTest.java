@@ -15,7 +15,9 @@ import com.gaebaljip.exceed.config.QueryDslConfig;
     QueryDslConfig.class,
     MemberConverter.class,
     HistoryPersistenceAdapter.class,
-    MealPersistenceAdapter.class
+    MealPersistenceAdapter.class,
+    ColumnEncryptor.class,
+    Encryption.class
 })
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
