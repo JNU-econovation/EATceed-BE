@@ -40,6 +40,7 @@ exceed:
   deepLink :
     signUp: eatceed://checkemail
     updatePassword: eatceed://changepw
+    policy: ${EXCEED_POLICY_URL}
 
 springdoc:
   api-docs:

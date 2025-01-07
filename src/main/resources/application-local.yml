@@ -45,6 +45,7 @@ exceed:
   deepLink :
     signUp : eatceed://checkemail
     updatePassword : eatceed://changepw
+    policy: ${EXCEED_POLICY_URL}
 
 # swagger
 springdoc:
