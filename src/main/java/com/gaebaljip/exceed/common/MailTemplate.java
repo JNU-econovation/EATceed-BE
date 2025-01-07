@@ -10,6 +10,7 @@ public class MailTemplate {
     public static final String SIGN_UP_MAIL_CONTEXT = "signupLink";
     public static final String WITHDRAW_TITLE = "회원 탈퇴 완료 안내";
     public static final String POLICY_MAIL_CONTEXT = "policyLink";
+    public static final String CONTACT_MAIL_CONTEXT = "contactEmail";
     public static final String FIND_PASSWORD_MAIL_CONTEXT = "findPasswordLink";
     public static final String SIGN_UP_CODE = "code";
     public static final String SIGN_UP_EMAIL = "email";

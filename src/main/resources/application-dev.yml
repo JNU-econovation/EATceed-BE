@@ -45,6 +45,8 @@ exceed:
     signUp: eatceed://checkemail
     updatePassword: eatceed://changepw
     policy: ${EXCEED_POLICY_URL}
+  contact:
+    email: ${EXCEED_CONTACT_EMAIL}
 
 springdoc:
   api-docs:

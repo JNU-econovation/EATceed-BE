@@ -38,6 +38,9 @@ public class DeleteMemberEventListener {
     @Value("${exceed.deepLink.policy}")
     private String POLICY_URL;
 
+    @Value("${exceed.contact.email}")
+    private String CONTACT_EMAIL;
+
     @EventListener(classes = DeleteMemberEvent.class)
     @Transactional
     public void handle(DeleteMemberEvent event) {
@@ -77,6 +80,7 @@ public class DeleteMemberEventListener {
     private void sendEmail(MemberEntity memberEntity) {
         Context context = new Context();
         context.setVariable(MailTemplate.POLICY_MAIL_CONTEXT, POLICY_URL);
+        context.setVariable(MailTemplate.CONTACT_MAIL_CONTEXT, CONTACT_EMAIL);
         emailPort.sendEmail(
                 memberEntity.getEmail(),
                 MailTemplate.WITHDRAW_TITLE,
