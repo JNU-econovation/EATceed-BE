@@ -35,6 +35,9 @@ exceed:
   deepLink :
     signUp: eatceed://checkemail
     updatePassword: eatceed://changepw
+    policy: eatceed://policy
+  contact:
+    email: eatceed@gmail.com
 
 
 encryption:

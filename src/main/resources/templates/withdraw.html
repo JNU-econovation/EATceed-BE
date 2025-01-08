@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 탈퇴 완료</title>
+  <style>
+    /* 기본 스타일 */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .email-header {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333333;
+      margin-bottom: 10px;
+    }
+    .email-body {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #555555;
+      margin-bottom: 20px;
+    }
+    .email-footer {
+      font-size: 12px;
+      color: #999999;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #007bff;
+    }
+    .link {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="email-container">
+  <!-- 헤더 -->
+  <div class="email-header">회원 탈퇴 완료 안내</div>
+
+  <!-- 본문 -->
+  <div class="email-body">
+    안녕하세요, <strong>[EATceed]</strong> 팀입니다.<br><br>
+    회원님의 탈퇴 요청이 정상적으로 처리되었음을 안내드립니다.<br><br>
+    회원 탈퇴에 따라 회원님의 개인정보는 <a th:href="${policyLink}" class="link">개인정보 처리방침</a>에 명시된 바에 따라 처리 및 삭제되었습니다.<br><br>
+    서비스 이용 중 불편함을 느끼셨다면, 언제든 의견을 남겨주시면 개선에 참고하겠습니다.<br><br>
+    추가 문의 사항이 있으시면 아래 이메일로 연락 주시기 바랍니다.<br>
+    <strong><a th:href="'mailto:' + ${contactEmail}" th:text="${contactEmail}" class="link"></a></strong> <br><br>
+    감사합니다.<br>
+    <strong>[EATceed]</strong> 팀 드림
+  </div>
+
+  <!-- 푸터 -->
+  <div class="email-footer">
+    이 이메일은 회원 탈퇴 요청에 따라 발송되었습니다.<br>
+  </div>
+</div>
+</body>
+</html>
