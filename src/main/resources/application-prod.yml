@@ -79,6 +79,8 @@ management:
         exclude: "env, beans"
 
 server:
+  servlet:
+    context-path: /prod
   tomcat:
     mbeanregistry:
       enabled: true
