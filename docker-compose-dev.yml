@@ -45,45 +45,14 @@ services:
       - ENCRYPTION_ALGORITHM=${ENCRYPTION_ALGORITHM}
       - SPRING_REDIS_HOST=gaebaljip-redis
       - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${SPRING_REDIS_PASSWORD}
+      - SCHEDULER_NUTRITION_CACHE_UPDATE=${SCHEDULER_NUTRITION_CACHE_UPDATE}
+      - APP_VERSION=${APP_VERSION}
+      - EXCEED_POLICY_URL=${EXCEED_POLICY_URL}
+      - EXCEED_CONTACT_EMAIL=${EXCEED_CONTACT_EMAIL}
     networks:
       - gaebaljip-network
     restart:  "no"
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    restart: "no"
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-data:/var/lib/grafana
-      - ./resources/gaebaljip-develop-environment/grafana/provisioning/:/etc/grafana/provisioning/
-    environment:
-      - GF_SERVER_ROOT_URL=localhost:3000
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
-    depends_on:
-      - prometheus
-    networks:
-      - gaebaljip-network
-
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    restart: "no"
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./resources/gaebaljip-develop-environment/prometheus/config:/etc/prometheus/
-      - prometheus-data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-    networks:
-      - gaebaljip-network
-
-volumes:
-  grafana-data:
-  prometheus-data:
 
 networks:
   gaebaljip-network:
