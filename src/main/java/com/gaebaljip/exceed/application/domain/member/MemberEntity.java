@@ -10,6 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 import com.gaebaljip.exceed.adapter.out.jpa.member.GenderConvert;
 import com.gaebaljip.exceed.application.domain.agreement.AgreementEntity;
 import com.gaebaljip.exceed.common.BaseEntity;
+import com.gaebaljip.exceed.common.ColumnEncryptor;
 
 import lombok.*;
 
@@ -49,6 +50,7 @@ public class MemberEntity extends BaseEntity {
     @Builder.Default
     private Boolean checked = false;
 
+    @Convert(converter = ColumnEncryptor.class)
     @Column(name = ENTITY_PREFIX + "_ETC")
     private String etc;
 
