@@ -1,14 +1,14 @@
-INSERT INTO AGREEMENT_TB (AGREEMENT_PK, CREATED_DATE, UPDATED_DATE, AGREEMENT_IS_PRIVACY_POLICY_AGREE, AGREEMENT_IS_TERMS_SERVICE_AGREE, AGREEMENT_IS_OVER_AGE)
-VALUES (1, '2023-11-01 08:00:00', '2023-11-01 08:00:00', true, true, true),
-       (2, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
-       (3, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
-       (4, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
-       (5, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
-       (6, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
-       (7, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
-       (8, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
-       (9, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true),
-       (10, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true);
+INSERT INTO AGREEMENT_TB (AGREEMENT_PK, CREATED_DATE, UPDATED_DATE, AGREEMENT_IS_PRIVACY_POLICY_AGREE, AGREEMENT_IS_TERMS_SERVICE_AGREE, AGREEMENT_IS_OVER_AGE, AGREEMENT_IS_SENSITIVE_DATA_AGREE)
+VALUES (1, '2023-11-01 08:00:00', '2023-11-01 08:00:00', true, true, true, true),
+       (2, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true),
+       (3, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true),
+       (4, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true),
+       (5, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true),
+       (6, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true),
+       (7, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true),
+       (8, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true),
+       (9, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true),
+       (10, '2023-12-01 08:00:00', '2023-12-01 08:00:00', true, true, true, true);
 
 INSERT INTO MEMBER_TB (MEMBER_PK, CREATED_DATE, UPDATED_DATE, MEMBER_ACTIVITY, MEMBER_AGE, MEMBER_ETC, MEMBER_GENDER,
                        MEMBER_HEIGHT, MEMBER_WEIGHT, MEMBER_TARGET_WEIGHT, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_ROLE, MEMBER_CHECKED, AGREEMENT_FK)
