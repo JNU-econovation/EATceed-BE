@@ -62,8 +62,11 @@ public class AgreementEntity extends BaseEntity {
     }
 
     private void validateAgreement(
-            Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
-        if (!isPrivacyPolicyAgree && isTermsServiceAgree && isOverAge) {
+            Boolean isPrivacyPolicyAgree,
+            Boolean isTermsServiceAgree,
+            Boolean isOverAge,
+            Boolean isSensitiveDataAgree) {
+        if (!(isPrivacyPolicyAgree && isTermsServiceAgree && isOverAge && isSensitiveDataAgree)) {
             throw InvalidAgreementException.EXCEPTION;
         }
     }
@@ -87,5 +90,9 @@ public class AgreementEntity extends BaseEntity {
 
     public void agreeTermsService(boolean isTermsServiceAgree) {
         this.isTermsServiceAgree = isTermsServiceAgree;
+    }
+
+    public void agreeSensitiveData(boolean isSensitiveDataAgree) {
+        this.isSensitiveDataAgree = isSensitiveDataAgree;
     }
 }
