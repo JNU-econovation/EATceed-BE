@@ -42,6 +42,12 @@ public class AgreementEntity extends BaseEntity {
     @Column(name = ENTITY_PREFIX + "_IS_OVER_AGE", columnDefinition = "tinyint", nullable = false)
     private Boolean isOverAge = true;
 
+    @Column(
+            name = ENTITY_PREFIX + "_IS_SENSITIVE_DATA_AGREE",
+            columnDefinition = "tinyint",
+            nullable = false)
+    private Boolean isSensitiveDataAgree = true;
+
     @Builder
     private AgreementEntity(
             Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
