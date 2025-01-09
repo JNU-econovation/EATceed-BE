@@ -31,22 +31,22 @@ public class AgreementEntity extends BaseEntity {
             name = ENTITY_PREFIX + "_IS_PRIVACY_POLICY_AGREE",
             columnDefinition = "tinyint",
             nullable = false)
-    private Boolean isPrivacyPolicyAgree = true;
+    private Boolean isPrivacyPolicyAgree;
 
     @Column(
             name = ENTITY_PREFIX + "_IS_TERMS_SERVICE_AGREE",
             columnDefinition = "tinyint",
             nullable = false)
-    private Boolean isTermsServiceAgree = true;
+    private Boolean isTermsServiceAgree;
 
     @Column(name = ENTITY_PREFIX + "_IS_OVER_AGE", columnDefinition = "tinyint", nullable = false)
-    private Boolean isOverAge = true;
+    private Boolean isOverAge;
 
     @Column(
             name = ENTITY_PREFIX + "_IS_SENSITIVE_DATA_AGREE",
             columnDefinition = "tinyint",
             nullable = false)
-    private Boolean isSensitiveDataAgree = true;
+    private Boolean isSensitiveDataAgree;
 
     @Builder
     private AgreementEntity(
