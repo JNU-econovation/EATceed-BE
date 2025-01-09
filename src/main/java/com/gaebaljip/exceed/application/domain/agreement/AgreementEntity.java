@@ -59,6 +59,7 @@ public class AgreementEntity extends BaseEntity {
         this.isPrivacyPolicyAgree = isPrivacyPolicyAgree;
         this.isTermsServiceAgree = isTermsServiceAgree;
         this.isOverAge = isOverAge;
+        this.isSensitiveDataAgree = isSensitiveDataAgree;
     }
 
     private void validateAgreement(
