@@ -22,7 +22,7 @@ public class AgreePrivacyPolicyService implements AgreePrivacyPolicyUsecase {
         validatePrivacyPolicyAgree(isPrivacyPolicyAgree);
         AgreementEntity agreementEntity =
                 agreementPort.query(memberId).orElseThrow(AgreementNotFoundException::new);
-        agreementEntity.agreeSensitiveData(isPrivacyPolicyAgree);
+        agreementEntity.agreePrivacyPolicy(isPrivacyPolicyAgree);
     }
 
     private void validatePrivacyPolicyAgree(boolean isPrivacyPolicyAgree) {
