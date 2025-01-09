@@ -50,8 +50,12 @@ public class AgreementEntity extends BaseEntity {
 
     @Builder
     private AgreementEntity(
-            Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
-        validateAgreement(isPrivacyPolicyAgree, isTermsServiceAgree, isOverAge);
+            Boolean isPrivacyPolicyAgree,
+            Boolean isTermsServiceAgree,
+            Boolean isOverAge,
+            Boolean isSensitiveDataAgree) {
+        validateAgreement(
+                isPrivacyPolicyAgree, isTermsServiceAgree, isOverAge, isSensitiveDataAgree);
         this.isPrivacyPolicyAgree = isPrivacyPolicyAgree;
         this.isTermsServiceAgree = isTermsServiceAgree;
         this.isOverAge = isOverAge;
@@ -65,11 +69,15 @@ public class AgreementEntity extends BaseEntity {
     }
 
     public static AgreementEntity createAgreement(
-            Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
+            Boolean isPrivacyPolicyAgree,
+            Boolean isTermsServiceAgree,
+            Boolean isOverAge,
+            Boolean isSensitiveDataAgree) {
         return AgreementEntity.builder()
                 .isPrivacyPolicyAgree(isPrivacyPolicyAgree)
                 .isTermsServiceAgree(isTermsServiceAgree)
                 .isOverAge(isOverAge)
+                .isSensitiveDataAgree(isSensitiveDataAgree)
                 .build();
     }
 

@@ -33,7 +33,8 @@ public class CreateMemberService implements CreateMemberUsecase {
                     AgreementEntity.createAgreement(
                             signUpMemberRequest.isPrivacyPolicyAgree(),
                             signUpMemberRequest.isTermsServiceAgree(),
-                            signUpMemberRequest.isOverAge());
+                            signUpMemberRequest.isOverAge(),
+                            signUpMemberRequest.isSensitiveDataAgree());
             agreementPort.command(agreementEntity);
             MemberEntity memberEntity =
                     MemberEntity.createMember(
