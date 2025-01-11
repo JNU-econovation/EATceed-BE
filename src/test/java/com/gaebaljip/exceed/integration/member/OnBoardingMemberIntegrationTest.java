@@ -69,6 +69,7 @@ class OnBoardingMemberIntegrationTest extends IntegrationTest {
                         .isTermsServiceAgree(true)
                         .isPrivacyPolicyAgree(true)
                         .isOverAge(true)
+                        .isSensitiveDataAgree(true)
                         .build();
         agreementRepository.save(agreementEntity);
 

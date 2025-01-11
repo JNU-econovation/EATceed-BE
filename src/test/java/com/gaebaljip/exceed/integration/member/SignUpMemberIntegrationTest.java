@@ -95,6 +95,7 @@ class SignUpMemberIntegrationTest extends IntegrationTest {
                         .isTermsServiceAgree(request.isTermsServiceAgree())
                         .isPrivacyPolicyAgree(request.isPrivacyPolicyAgree())
                         .isOverAge(request.isOverAge())
+                        .isSensitiveDataAgree(request.isSensitiveDataAgree())
                         .build();
         agreementRepository.save(agreementEntity);
 
@@ -115,6 +116,7 @@ class SignUpMemberIntegrationTest extends IntegrationTest {
                 .isPrivacyPolicyAgree(true)
                 .isTermsServiceAgree(true)
                 .isOverAge(true)
+                .isSensitiveDataAgree(true)
                 .build();
     }
 }

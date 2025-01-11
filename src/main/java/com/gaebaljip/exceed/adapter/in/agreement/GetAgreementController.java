@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gaebaljip.exceed.adapter.in.agreement.response.GetPrivacyPolicyResponse;
+import com.gaebaljip.exceed.adapter.in.agreement.response.GetSensitiveDataAgreeResponse;
 import com.gaebaljip.exceed.adapter.in.agreement.response.GetTermsServiceAgreeResponse;
 import com.gaebaljip.exceed.application.port.in.agreement.GetAgreementQuery;
 import com.gaebaljip.exceed.common.ApiResponse;
@@ -49,6 +50,16 @@ public class GetAgreementController {
         GetAgreementDTO getAgreementDTO = getAgreementQuery.execute(memberId);
         return ApiResponseGenerator.success(
                 GetTermsServiceAgreeResponse.from(getAgreementDTO.isTermsServiceAgree()),
+                HttpStatus.OK);
+    }
+
+    @Operation(summary = "민감정보 동의 여부 조회", description = "민감정보 동의 여부를 조회한다.")
+    @GetMapping("/agreement/sensitiveData")
+    public ApiResponse<CustomBody<GetSensitiveDataAgreeResponse>> getSensitiveDataAgree(
+            @Parameter(hidden = true) @AuthenticationMemberId Long memberId) {
+        GetAgreementDTO getAgreementDTO = getAgreementQuery.execute(memberId);
+        return ApiResponseGenerator.success(
+                GetSensitiveDataAgreeResponse.from(getAgreementDTO.isSensitiveDataAgree()),
                 HttpStatus.OK);
     }
 }

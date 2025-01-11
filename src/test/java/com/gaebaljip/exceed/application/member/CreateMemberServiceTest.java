@@ -36,7 +36,7 @@ class CreateMemberServiceTest {
     void when_NotExistEmail_then_CreateMember() {
         // given
         SignUpMemberRequest signUpMemberRequest =
-                new SignUpMemberRequest(getEmail(), getPassword(), true, true, true);
+                new SignUpMemberRequest(getEmail(), getPassword(), true, true, true, true);
         given(memberPort.existsByEmail(anyString())).willReturn(false);
 
         // when
