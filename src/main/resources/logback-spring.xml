@@ -6,13 +6,19 @@
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{REQUEST_ID}] [%thread] %5level %20logger - %msg%n" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.gaebaljip.exceed.common.log.MaskingPatternLayout">
+                <maskPattern>\"(?i).*password.*"\s*:\s*\"(.*?)\"</maskPattern>
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            </layout>
         </encoder>
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <encoder>
-            <pattern>${FILE_LOG_PATTERN}</pattern>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.gaebaljip.exceed.common.log.MaskingPatternLayout">
+                <maskPattern>\"(?i).*password.*"\s*:\s*\"(.*?)\"</maskPattern>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </layout>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>./log/%d{yyyy-MM-dd}.%i.log</fileNamePattern>
