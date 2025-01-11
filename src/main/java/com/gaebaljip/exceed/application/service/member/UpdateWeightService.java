@@ -26,7 +26,6 @@ public class UpdateWeightService implements UpdateWeightUsecase {
 
     @Override
     @Transactional
-    @EventPublisherStatus
     public UpdateWeightResponse execute(UpdateWeightCommand command) {
         MemberEntity memberEntity = memberPort.query(command.memberId());
         HistoryEntity history =
@@ -41,8 +40,6 @@ public class UpdateWeightService implements UpdateWeightUsecase {
                         .build();
         historyPort.command(history);
         memberEntity.updateWeight(command.weight(), command.targetWeight());
-        Events.raise(
-                UpdateWeightEvent.from(command.memberId(), command.uri(), LocalDateTime.now()));
         return UpdateWeightResponse.of(memberEntity.getWeight(), memberEntity.getTargetWeight());
     }
 }
