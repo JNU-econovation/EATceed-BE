@@ -1,7 +1,5 @@
 package com.gaebaljip.exceed.application.service.member;
 
-import java.time.LocalDateTime;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +10,6 @@ import com.gaebaljip.exceed.application.port.in.member.UpdateWeightCommand;
 import com.gaebaljip.exceed.application.port.in.member.UpdateWeightUsecase;
 import com.gaebaljip.exceed.application.port.out.member.HistoryPort;
 import com.gaebaljip.exceed.application.port.out.member.MemberPort;
-import com.gaebaljip.exceed.common.annotation.EventPublisherStatus;
-import com.gaebaljip.exceed.common.event.Events;
-import com.gaebaljip.exceed.common.event.UpdateWeightEvent;
 
 import lombok.RequiredArgsConstructor;
 
