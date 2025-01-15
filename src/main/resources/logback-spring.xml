@@ -8,41 +8,25 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="com.gaebaljip.exceed.common.log.MaskingPatternLayout">
-                <maskPattern>\"(?i).*email.*"\s*:\s*\"(.*?)\"</maskPattern>
                 <maskPattern>\"(?i).*password.*"\s*:\s*\"(.*?)\"</maskPattern>
-                <maskPattern>\"(?i).*height.*"\s*:\s*(\d+)</maskPattern>
-                <maskPattern>\"(?i).*weight.*"\s*:\s*(\d+)</maskPattern>
-                <maskPattern>\"(?i).*targetWeight.*"\s*:\s*(\d+)</maskPattern>
-                <maskPattern>\"(?i).*age.*"\s*:\s*(\d+)</maskPattern>
-                <maskPattern>\"(?i).*etc.*"\s*:\s*\"(.*?)\"</maskPattern>
-                <maskPattern>\"(?i).*activity.*"\s*:\s*\"(.*?)\"</maskPattern>
                 <pattern>${CONSOLE_LOG_PATTERN}</pattern>
             </layout>
         </encoder>
     </appender>
-
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="com.gaebaljip.exceed.common.log.MaskingPatternLayout">
-                <maskPattern>\"(?i).*email.*"\s*:\s*\"(.*?)\"</maskPattern>
                 <maskPattern>\"(?i).*password.*"\s*:\s*\"(.*?)\"</maskPattern>
-                <maskPattern>\"(?i).*height.*"\s*:\s*(\d+)</maskPattern>
-                <maskPattern>\"(?i).*weight.*"\s*:\s*(\d+)</maskPattern>
-                <maskPattern>\"(?i).*targetWeight.*"\s*:\s*(\d+)</maskPattern>
-                <maskPattern>\"(?i).*age.*"\s*:\s*(\d+)</maskPattern>
-                <maskPattern>\"(?i).*etc.*"\s*:\s*\"(.*?)\"</maskPattern>
-                <maskPattern>\"(?i).*activity.*"\s*:\s*\"(.*?)\"</maskPattern>
                 <pattern>${FILE_LOG_PATTERN}</pattern>
             </layout>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>./log/%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
-            <maxHistory>30</maxHistory>
+            <maxHistory>90</maxHistory>
             <totalSizeCap>100MB</totalSizeCap>
         </rollingPolicy>
     </appender>
-
 
     <springProfile name="local">
         <logger name="com.gaebaljip.exceed" level="DEBUG" />
