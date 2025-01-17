@@ -14,6 +14,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.gaebaljip.exceed.common.exception.DecryptionErrorException;
 import com.gaebaljip.exceed.common.exception.EncryptionErrorException;
 
 @Component
@@ -39,6 +40,17 @@ public class Encryption {
             return Base64.getUrlEncoder().encodeToString(encrypted);
         } catch (Exception e) {
             throw EncryptionErrorException.EXECPTION;
+        }
+    }
+
+    public String decrypt(final String encryptedValue) {
+        try {
+            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            byte[] encryptedBytes = Base64.getUrlDecoder().decode(encryptedValue);
+            byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+            return new String(decryptedBytes, StandardCharsets.UTF_8); // 바이트 배열을 String으로 변환
+        } catch (Exception e) {
+            throw DecryptionErrorException.EXECPTION;
         }
     }
 

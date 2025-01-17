@@ -31,39 +31,57 @@ public class AgreementEntity extends BaseEntity {
             name = ENTITY_PREFIX + "_IS_PRIVACY_POLICY_AGREE",
             columnDefinition = "tinyint",
             nullable = false)
-    private Boolean isPrivacyPolicyAgree = true;
+    private Boolean isPrivacyPolicyAgree;
 
     @Column(
             name = ENTITY_PREFIX + "_IS_TERMS_SERVICE_AGREE",
             columnDefinition = "tinyint",
             nullable = false)
-    private Boolean isTermsServiceAgree = true;
+    private Boolean isTermsServiceAgree;
 
     @Column(name = ENTITY_PREFIX + "_IS_OVER_AGE", columnDefinition = "tinyint", nullable = false)
-    private Boolean isOverAge = true;
+    private Boolean isOverAge;
+
+    @Column(
+            name = ENTITY_PREFIX + "_IS_SENSITIVE_DATA_AGREE",
+            columnDefinition = "tinyint",
+            nullable = false)
+    private Boolean isSensitiveDataAgree;
 
     @Builder
     private AgreementEntity(
-            Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
-        validateAgreement(isPrivacyPolicyAgree, isTermsServiceAgree, isOverAge);
+            Boolean isPrivacyPolicyAgree,
+            Boolean isTermsServiceAgree,
+            Boolean isOverAge,
+            Boolean isSensitiveDataAgree) {
+        validateAgreement(
+                isPrivacyPolicyAgree, isTermsServiceAgree, isOverAge, isSensitiveDataAgree);
         this.isPrivacyPolicyAgree = isPrivacyPolicyAgree;
         this.isTermsServiceAgree = isTermsServiceAgree;
         this.isOverAge = isOverAge;
+        this.isSensitiveDataAgree = isSensitiveDataAgree;
     }
 
     private void validateAgreement(
-            Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
-        if (!isPrivacyPolicyAgree && isTermsServiceAgree && isOverAge) {
+            Boolean isPrivacyPolicyAgree,
+            Boolean isTermsServiceAgree,
+            Boolean isOverAge,
+            Boolean isSensitiveDataAgree) {
+        if (!(isPrivacyPolicyAgree && isTermsServiceAgree && isOverAge && isSensitiveDataAgree)) {
             throw InvalidAgreementException.EXCEPTION;
         }
     }
 
     public static AgreementEntity createAgreement(
-            Boolean isPrivacyPolicyAgree, Boolean isTermsServiceAgree, Boolean isOverAge) {
+            Boolean isPrivacyPolicyAgree,
+            Boolean isTermsServiceAgree,
+            Boolean isOverAge,
+            Boolean isSensitiveDataAgree) {
         return AgreementEntity.builder()
                 .isPrivacyPolicyAgree(isPrivacyPolicyAgree)
                 .isTermsServiceAgree(isTermsServiceAgree)
                 .isOverAge(isOverAge)
+                .isSensitiveDataAgree(isSensitiveDataAgree)
                 .build();
     }
 
@@ -73,5 +91,9 @@ public class AgreementEntity extends BaseEntity {
 
     public void agreeTermsService(boolean isTermsServiceAgree) {
         this.isTermsServiceAgree = isTermsServiceAgree;
+    }
+
+    public void agreeSensitiveData(boolean isSensitiveDataAgree) {
+        this.isSensitiveDataAgree = isSensitiveDataAgree;
     }
 }

@@ -36,7 +36,14 @@ public class JwtAuthenticationPoint implements AuthenticationEntryPoint {
             HttpServletResponse response,
             AuthenticationException authException)
             throws IOException {
-        if (request.getAttribute("exception") == null) {
+
+        if (request.getAttribute("swaggerCannotProdException") != null) {
+            resolver.resolveException(
+                    request,
+                    response,
+                    null,
+                    (Exception) request.getAttribute("swaggerCannotProdException"));
+        } else if (request.getAttribute("exception") == null) {
             handleAuthenticationException(response);
         } else {
             resolver.resolveException(

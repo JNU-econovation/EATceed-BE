@@ -25,7 +25,6 @@ import com.gaebaljip.exceed.adapter.in.meal.GetMealController;
 import com.gaebaljip.exceed.adapter.in.member.OnBoardingController;
 import com.gaebaljip.exceed.adapter.in.member.UpdateMemberController;
 import com.gaebaljip.exceed.adapter.in.member.UpdateWeightController;
-import com.gaebaljip.exceed.adapter.in.notify.EmitterController;
 import com.gaebaljip.exceed.adapter.in.nutritionist.GetAnalysisController;
 import com.gaebaljip.exceed.application.port.in.meal.*;
 import com.gaebaljip.exceed.application.port.in.member.*;
@@ -49,7 +48,6 @@ import com.gaebaljip.exceed.application.service.nutritionist.GetDailyAnalysisSer
     UpdateMemberController.class,
     UpdateWeightController.class,
     GetAnalysisController.class,
-    EmitterController.class
 })
 @MockBeans({
     @MockBean(AuthService.class),

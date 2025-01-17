@@ -5,9 +5,9 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
   redis:
-    host: ${SPRING_REDIS_HOST}
-    port: ${SPRING_REDIS_PORT}
-    password : ${SPRING_REDIS_PASSWORD}
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    password : ${REDIS_PASSWORD}
   jpa:
     hibernate:
       naming:
@@ -44,6 +44,9 @@ exceed:
   deepLink :
     signUp: eatceed://checkemail
     updatePassword: eatceed://changepw
+    policy: ${EXCEED_POLICY_URL}
+  contact:
+    email: ${EXCEED_CONTACT_EMAIL}
 
 springdoc:
   api-docs:
@@ -80,6 +83,8 @@ management:
         exclude: "env, beans"
 
 server:
+  servlet:
+    context-path: /dev
   tomcat:
     mbeanregistry:
       enabled: true

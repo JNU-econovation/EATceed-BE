@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gaebaljip.exceed.adapter.in.agreement.request.AgreePrivacyPolicyRequest;
+import com.gaebaljip.exceed.adapter.in.agreement.request.AgreeSensitiveDataRequest;
 import com.gaebaljip.exceed.adapter.in.agreement.request.AgreeTermsServiceRequest;
 import com.gaebaljip.exceed.application.port.in.agreement.AgreePrivacyPolicyUsecase;
+import com.gaebaljip.exceed.application.port.in.agreement.AgreeSensitiveDataUsecase;
 import com.gaebaljip.exceed.application.port.in.agreement.AgreeTermsUsecase;
 import com.gaebaljip.exceed.common.ApiResponse;
 import com.gaebaljip.exceed.common.ApiResponse.CustomBody;
@@ -18,6 +20,7 @@ import com.gaebaljip.exceed.common.ApiResponseGenerator;
 import com.gaebaljip.exceed.common.annotation.AuthenticationMemberId;
 import com.gaebaljip.exceed.common.docs.SwaggerTag;
 import com.gaebaljip.exceed.common.docs.agreement.AgreePrivacyPolicyDocs;
+import com.gaebaljip.exceed.common.docs.agreement.AgreeSensitiveDataDocs;
 import com.gaebaljip.exceed.common.docs.agreement.AgreeTermsServiceDocs;
 import com.gaebaljip.exceed.common.swagger.ApiErrorExceptionsExample;
 
@@ -38,6 +41,7 @@ public class UpdateAgreementController {
 
     private final AgreePrivacyPolicyUsecase agreePrivacyPolicyUsecase;
     private final AgreeTermsUsecase agreeTermsUsecase;
+    private final AgreeSensitiveDataUsecase agreeSensitiveDataUsecase;
 
     @Operation(summary = "개인 정보 처리방침 동의", description = "개인 정보 처리방침을 동의한다.")
     @PatchMapping("/agreement/privacyPolicy")
@@ -56,6 +60,16 @@ public class UpdateAgreementController {
             @RequestBody @Valid AgreeTermsServiceRequest request,
             @Parameter(hidden = true) @AuthenticationMemberId Long memberId) {
         agreeTermsUsecase.execute(memberId, request.isTermsServiceAgree());
+        return ApiResponseGenerator.success(HttpStatus.OK);
+    }
+
+    @Operation(summary = "민감정보 동의", description = "민감정보를 동의한다.")
+    @PatchMapping("/agreement/sensitiveData")
+    @ApiErrorExceptionsExample(AgreeSensitiveDataDocs.class)
+    public ApiResponse<CustomBody<Void>> agreeSensitiveData(
+            @RequestBody @Valid AgreeSensitiveDataRequest request,
+            @Parameter(hidden = true) @AuthenticationMemberId Long memberId) {
+        agreeSensitiveDataUsecase.execute(memberId, request.isSensitiveDataAgree());
         return ApiResponseGenerator.success(HttpStatus.OK);
     }
 }

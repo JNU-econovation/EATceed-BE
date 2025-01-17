@@ -35,11 +35,14 @@ exceed:
   deepLink :
     signUp: eatceed://checkemail
     updatePassword: eatceed://changepw
+    policy: eatceed://policy
+  contact:
+    email: eatceed@gmail.com
 
 
 encryption:
-  spec: AES
-  secret: secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret
+  spec: AES/ECB/PKCS5Padding
+  secret: secretsecretsecretsecretsec
   algorithm: AES
 
 logging.level:

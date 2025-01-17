@@ -18,7 +18,6 @@ spring:
       hibernate:
         show_sql : true
         format_sql: true
-        use_sql_comments: true
 
 
 cloud:
@@ -46,6 +45,9 @@ exceed:
   deepLink :
     signUp : eatceed://checkemail
     updatePassword : eatceed://changepw
+    policy: ${EXCEED_POLICY_URL}
+  contact:
+    email: ${EXCEED_CONTACT_EMAIL}
 
 # swagger
 springdoc:

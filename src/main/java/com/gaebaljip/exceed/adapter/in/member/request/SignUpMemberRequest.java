@@ -17,7 +17,9 @@ public record SignUpMemberRequest(
         @NotNull(message = "약관 확인 여부를 " + ValidationMessage.NOT_NULL) Boolean isPrivacyPolicyAgree,
         @NotNull(message = "개인 정보 처리방침 확인 여부를 " + ValidationMessage.NOT_NULL)
                 Boolean isTermsServiceAgree,
-        @NotNull(message = "만 14세 이상 여부를 " + ValidationMessage.NOT_NULL) Boolean isOverAge) {
+        @NotNull(message = "만 14세 이상 여부를 " + ValidationMessage.NOT_NULL) Boolean isOverAge,
+        @NotNull(message = "민감 정보 동의 여부를 " + ValidationMessage.NOT_NULL)
+                Boolean isSensitiveDataAgree) {
 
     @Builder
     public SignUpMemberRequest {}
