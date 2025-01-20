@@ -36,7 +36,7 @@ jwt:
   secret: ${JWT_SECRET}
 
 exceed:
-  url : https://eatceed.net
+  url : https://eatceed.net/prod
   deepLink :
     signUp: eatceed://checkemail
     updatePassword: eatceed://changepw
