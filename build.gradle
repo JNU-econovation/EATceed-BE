@@ -73,22 +73,22 @@ dependencies {
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
 	// jwt
-	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 	//email
-	implementation group: 'software.amazon.awssdk', name: 'ses', version: "2.19.29"
+	implementation 'software.amazon.awssdk:ses:2.19.29'
 	implementation 'com.sun.mail:javax.mail:1.6.2'
 
 	//Swagger
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
 
-	//OpenCsv
-	implementation group: 'com.opencsv', name: 'opencsv', version: '5.7.1'
+	// OpenCsv
+	implementation 'com.opencsv:opencsv:5.7.1'
 
-	// quartz
-	implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
+	// Quartz
+	implementation 'org.quartz-scheduler:quartz:2.3.2'
 }
 
 tasks.named('bootBuildImage') {
