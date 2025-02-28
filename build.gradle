@@ -1,24 +1,23 @@
 // Querydsl 버전 plugins
 buildscript {
 	ext {
-		queryDslVersion = "5.0.0"
+		queryDslVersion = "${queryDSLVersion}"
 	}
 }
 
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.7.11'
-	id 'io.spring.dependency-management' version '1.1.4'
-	id "me.champeau.jmh" version "0.7.2"
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
 	id 'com.diffplug.spotless' version '6.23.3'
 	id 'jacoco'
 }
 
-group = 'com.gaebaljip'
-version = '1.0.0'
+group = "${projectGroup}"
+version = "${applicationVersion}"
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = "${javaVersion}"
 }
 
 repositories {
@@ -29,14 +28,21 @@ jar {
 	enabled = false
 }
 
+dependencyManagement {
+	imports {
+		mavenBom "org.testcontainers:testcontainers-bom:${testContainersVersion}"
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	// database
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	testImplementation 'org.projectlombok:lombok:1.18.26'
+	testImplementation 'org.projectlombok:lombok'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
@@ -47,10 +53,11 @@ dependencies {
 	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	testImplementation "org.testcontainers:mariadb:1.19.8"
-	testImplementation "org.testcontainers:testcontainers:1.19.8"
-	testImplementation "org.testcontainers:junit-jupiter:1.19.8"
-	testImplementation "org.testcontainers:localstack:1.19.8"
+	testImplementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	testImplementation "org.testcontainers:mariadb"
+	testImplementation "org.testcontainers:testcontainers"
+	testImplementation "org.testcontainers:junit-jupiter"
+	testImplementation "org.testcontainers:localstack"
 	testImplementation "org.jeasy:easy-random-core:5.0.0"
 
 
@@ -71,11 +78,8 @@ dependencies {
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
 	//email
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'software.amazon.awssdk', name: 'ses', version: "2.19.29"
 	implementation 'com.sun.mail:javax.mail:1.6.2'
-
-	testImplementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	//Swagger
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
