@@ -54,7 +54,6 @@ dependencies {
 	testImplementation "org.jeasy:easy-random-core:5.0.0"
 
 
-
 	// querydsl
 	implementation 'com.querydsl:querydsl-jpa'
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
@@ -83,12 +82,6 @@ dependencies {
 
 	//OpenCsv
 	implementation group: 'com.opencsv', name: 'opencsv', version: '5.7.1'
-
-	// Actuator
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
-	// Prometheus
-	implementation 'io.micrometer:micrometer-registry-prometheus'
 
 	// quartz
 	implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
