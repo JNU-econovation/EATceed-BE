@@ -71,19 +71,9 @@ scheduler:
     cache:
       update : ${SCHEDULER_NUTRITION_CACHE_UPDATE}
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-        exclude: "env, beans"
-
 server:
   servlet:
     context-path: /prod
-  tomcat:
-    mbeanregistry:
-      enabled: true
 
 org:
   quartz:
