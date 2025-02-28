@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gaebaljip.exceed.adapter.in.nutritionist.response.GetMonthlyAnalysisResponse;
@@ -38,7 +38,7 @@ public class GetAchieveIntegrationTest extends IntegrationTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/achieve/" + testData)
+                        MockMvcRequestBuilders.get("/v1/achieve/" + testData)
                                 .contentType(MediaType.APPLICATION_JSON));
         // then
 
@@ -88,7 +88,7 @@ public class GetAchieveIntegrationTest extends IntegrationTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/achieve/" + testData)
+                        MockMvcRequestBuilders.get("/v1/achieve/" + testData)
                                 .contentType(MediaType.APPLICATION_JSON));
         // then
 
@@ -123,7 +123,7 @@ public class GetAchieveIntegrationTest extends IntegrationTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/achieve/" + testData)
+                        MockMvcRequestBuilders.get("/v1/achieve/" + testData)
                                 .contentType(MediaType.APPLICATION_JSON));
         // then
         resultActions.andExpectAll(
