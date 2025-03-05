@@ -1,6 +1,5 @@
 package com.gaebaljip.exceed.adapter.in.member;
 
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -61,7 +60,6 @@ class OnBoardingControllerTest extends ControllerTest {
         // then
         resultActions.andExpect(status().isBadRequest());
         resultActions.andExpect(jsonPath("$.error.reason").value(invalidValue + "는 올바르지 않은 값입니다."));
-        resultActions.andDo(document("onBoarding-fail"));
     }
 
     @Test

@@ -78,20 +78,6 @@ scheduler:
     cache:
       update : 0 0 0 * * *
 
-# Actuator
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-        exclude: "env, beans"
-
-server:
-  tomcat:
-    mbeanregistry:
-      enabled: true
-
 logging:
   level:
     org:

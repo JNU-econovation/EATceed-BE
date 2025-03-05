@@ -1,16 +1,12 @@
 package com.gaebaljip.exceed.common;
 
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.MockBeans;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -38,7 +34,6 @@ import com.gaebaljip.exceed.application.service.nutritionist.GetAnalysisService;
 import com.gaebaljip.exceed.application.service.nutritionist.GetDailyAnalysisService;
 
 @ActiveProfiles("test")
-@ExtendWith({RestDocumentationExtension.class})
 @WebMvcTest({
     AuthController.class,
     CreateFoodController.class,
@@ -84,12 +79,11 @@ public abstract class ControllerTest {
     @Autowired protected GetAnalysisService getAnalysisService;
 
     @BeforeEach
-    public void setup(RestDocumentationContextProvider restDocumentation) {
+    public void setup() {
         this.mockMvc =
                 MockMvcBuilders.webAppContextSetup(webApplicationContext)
                         .addFilters(new CharacterEncodingFilter("UTF-8", true)) // 필터 추가
                         .alwaysDo(print())
-                        .apply(documentationConfiguration(restDocumentation))
                         .build();
     }
 }

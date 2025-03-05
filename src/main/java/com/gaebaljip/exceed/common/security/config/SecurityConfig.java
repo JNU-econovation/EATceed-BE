@@ -65,7 +65,6 @@ public class SecurityConfig {
                 .antMatchers(
                         HttpMethod.GET,
                         "/v1/members/email/checked",
-                        "/actuator/**",
                         "/v1/health",
                         "/v1//findPassword-redirect",
                         "/v1/signUp-redirect",
