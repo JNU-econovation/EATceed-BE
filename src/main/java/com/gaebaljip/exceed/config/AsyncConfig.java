@@ -17,14 +17,11 @@ public class AsyncConfig implements AsyncConfigurer {
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(16);
-        executor.setMaxPoolSize(25);
+        executor.setCorePoolSize(5);
+        executor.setMaxPoolSize(15);
         executor.setQueueCapacity(10);
-        executor.setKeepAliveSeconds(60);
-        executor.setRejectedExecutionHandler(
-                (r, exec) -> {
-                    throw MailSendException.EXECPTION;
-                });
+        executor.setRejectedExecutionHandler(new AbortPolicy());
+        executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.initialize();
         return executor;
     }
