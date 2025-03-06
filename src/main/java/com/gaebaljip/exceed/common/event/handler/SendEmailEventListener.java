@@ -1,11 +1,9 @@
 package com.gaebaljip.exceed.common.event.handler;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionalEventListener;
 import org.thymeleaf.context.Context;
 
 import com.gaebaljip.exceed.application.domain.member.Code;
@@ -27,9 +25,8 @@ public class SendEmailEventListener {
 
     private Long expiredTime = 600000L;
 
-    @TransactionalEventListener(classes = SendEmailEvent.class)
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Async
+    @EventListener(classes = SendEmailEvent.class)
     public void handle(SendEmailEvent event) {
         int randomCode = createRandom();
         codePort.saveWithExpiration(event.getEmail(), String.valueOf(randomCode), expiredTime);
