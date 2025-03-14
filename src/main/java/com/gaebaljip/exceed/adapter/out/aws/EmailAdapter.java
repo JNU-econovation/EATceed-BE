@@ -8,7 +8,7 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import com.gaebaljip.exceed.application.port.out.member.EmailPort;
 
 import lombok.RequiredArgsConstructor;
-import software.amazon.awssdk.services.ses.SesAsyncClient;
+import software.amazon.awssdk.services.ses.SesClient;
 import software.amazon.awssdk.services.ses.model.*;
 
 @Component
@@ -18,12 +18,11 @@ public class EmailAdapter implements EmailPort {
     @Value("${cloud.aws.ses.mail-address}")
     private String mailAddress;
 
-    private final SesAsyncClient sesAsyncClient;
+    private final SesClient sesClient;
     private final SpringTemplateEngine htmlTemplateEngine;
 
     @Override
     public void sendEmail(String to, String title, String template, Context context) {
-
         String html = htmlTemplateEngine.process(template, context);
 
         SendEmailRequest sendEmailRequest =
@@ -33,7 +32,7 @@ public class EmailAdapter implements EmailPort {
                         .source(mailAddress)
                         .build();
 
-        sesAsyncClient.sendEmail(sendEmailRequest);
+        sesClient.sendEmail(sendEmailRequest);
     }
 
     private Message newMessage(String subject, String html) {
