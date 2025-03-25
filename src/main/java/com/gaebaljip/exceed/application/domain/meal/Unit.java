@@ -27,7 +27,7 @@ public class Unit {
     private Double multiple;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = ENTITY_PREFIX + "_UNIT_TYPE", nullable = false)
+    @Column(name = ENTITY_PREFIX + "_UNIT_TYPE")
     private UnitType unitType;
 
     public static Unit createUnit(Integer g, Double multiple) {
