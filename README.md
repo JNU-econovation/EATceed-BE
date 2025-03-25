@@ -45,7 +45,7 @@
 
 ## 시스템 아키텍처
 
-<img width="1000" alt="Image" src="https://github.com/user-attachments/assets/d013fc64-3b3a-4354-83a9-50a4117ae629">
+<img width="1000" alt="Image" src="https://github.com/user-attachments/assets/6d7befa2-3d6d-4223-aec9-f8e6c691119e" />
 
 ## ERD
 
