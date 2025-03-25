@@ -13,7 +13,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       dialect: org.hibernate.dialect.MariaDBDialect
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       hibernate:
         show_sql : true
@@ -77,20 +77,6 @@ scheduler:
   nutrition:
     cache:
       update : 0 0 0 * * *
-
-# Actuator
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-        exclude: "env, beans"
-
-server:
-  tomcat:
-    mbeanregistry:
-      enabled: true
 
 logging:
   level:

@@ -22,13 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LoggingFilter extends OncePerRequestFilter {
     public static final String SWAGGER_URI = "/swagger-ui";
     private static final List<String> excludeUrl =
-            List.of(
-                    "/actuator/health",
-                    "/actuator/prometheus",
-                    "/v1/health",
-                    "/api-docs/swagger-config",
-                    "/api-docs",
-                    "/favicon.ico");
+            List.of("/v1/health", "/api-docs/swagger-config", "/api-docs", "/favicon.ico");
 
     @Override
     protected void doFilterInternal(
@@ -53,7 +47,7 @@ public class LoggingFilter extends OncePerRequestFilter {
                         httpServletRequest, httpServletResponse, stopWatch.getTotalTimeSeconds());
         log.info("{}", httpLogMessage);
 
-        httpServletResponse.copyBodyToResponse(); // 다시한번 더 바디를 채워준다.
+        httpServletResponse.copyBodyToResponse();
 
         MDC.remove(LogKey.KEY);
     }

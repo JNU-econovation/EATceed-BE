@@ -12,6 +12,7 @@ import org.jeasy.random.api.Randomizer;
 import com.gaebaljip.exceed.application.domain.meal.DailyMealFoods;
 import com.gaebaljip.exceed.application.domain.meal.MealFoodEntity;
 import com.gaebaljip.exceed.application.domain.meal.Unit;
+import com.gaebaljip.exceed.application.domain.meal.UnitType;
 
 public class DailyMealFoodsFixtureFactory {
 
@@ -39,7 +40,7 @@ public class DailyMealFoodsFixtureFactory {
     private static class UnitRandomizer implements Randomizer<Unit> {
         @Override
         public Unit getRandomValue() {
-            Unit unit = new Unit(null, 1.0);
+            Unit unit = new Unit(null, 1.0, UnitType.MULTIPLE);
             return unit;
         }
     }

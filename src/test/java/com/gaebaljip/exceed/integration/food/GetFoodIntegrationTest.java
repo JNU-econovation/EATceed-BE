@@ -1,8 +1,5 @@
 package com.gaebaljip.exceed.integration.food;
 
-import static com.gaebaljip.exceed.common.util.ApiDocumentUtil.getDocumentRequest;
-import static com.gaebaljip.exceed.common.util.ApiDocumentUtil.getDocumentResponse;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -13,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -58,16 +54,10 @@ public class GetFoodIntegrationTest extends IntegrationTest {
 
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
 
-        resultActions
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.response.foodJson[0]").value("연어구이:802;"),
-                        jsonPath("$.response.foodJson[1]").value("연어롤:63;"))
-                .andDo(
-                        document(
-                                "get-food-noQueryString-success",
-                                getDocumentRequest(),
-                                getDocumentResponse()));
+        resultActions.andExpectAll(
+                status().isOk(),
+                jsonPath("$.response.foodJson[0]").value("연어구이:802;"),
+                jsonPath("$.response.foodJson[1]").value("연어롤:63;"));
     }
 
     @Test
@@ -78,29 +68,23 @@ public class GetFoodIntegrationTest extends IntegrationTest {
 
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/foods/{foodId}", foodId)
+                        MockMvcRequestBuilders.get("/v1/foods/{foodId}", foodId)
                                 .contentType(MediaType.APPLICATION_JSON));
 
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
 
-        resultActions
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.response.foodId").value(1L),
-                        jsonPath("$.response.sugars").value(3.1),
-                        jsonPath("$.response.dietaryFiber").value(2.3),
-                        jsonPath("$.response.sodium").value(500),
-                        jsonPath("$.response.name").value("사과"),
-                        jsonPath("$.response.calorie").value(200.0),
-                        jsonPath("$.response.carbohydrate").value(30.0),
-                        jsonPath("$.response.protein").value(2.0),
-                        jsonPath("$.response.fat").value(10.0),
-                        jsonPath("$.response.servingSize").value(120.0))
-                .andDo(
-                        document(
-                                "get-food-noQueryString-success",
-                                getDocumentRequest(),
-                                getDocumentResponse()));
+        resultActions.andExpectAll(
+                status().isOk(),
+                jsonPath("$.response.foodId").value(1L),
+                jsonPath("$.response.sugars").value(3.1),
+                jsonPath("$.response.dietaryFiber").value(2.3),
+                jsonPath("$.response.sodium").value(500),
+                jsonPath("$.response.name").value("사과"),
+                jsonPath("$.response.calorie").value(200.0),
+                jsonPath("$.response.carbohydrate").value(30.0),
+                jsonPath("$.response.protein").value(2.0),
+                jsonPath("$.response.fat").value(10.0),
+                jsonPath("$.response.servingSize").value(120.0));
     }
 
     @Test
@@ -111,20 +95,14 @@ public class GetFoodIntegrationTest extends IntegrationTest {
 
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.get("/v1/foods/{foodId}", foodId)
+                        MockMvcRequestBuilders.get("/v1/foods/{foodId}", foodId)
                                 .contentType(MediaType.APPLICATION_JSON));
 
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
 
-        resultActions
-                .andExpectAll(
-                        status().isBadRequest(),
-                        jsonPath("$.error.code").value(FoodError.INVALID_FOOD.getCode()),
-                        jsonPath("$.error.reason").value(FoodError.INVALID_FOOD.getReason()))
-                .andDo(
-                        document(
-                                "get-food-noQueryString-fail",
-                                getDocumentRequest(),
-                                getDocumentResponse()));
+        resultActions.andExpectAll(
+                status().isBadRequest(),
+                jsonPath("$.error.code").value(FoodError.INVALID_FOOD.getCode()),
+                jsonPath("$.error.reason").value(FoodError.INVALID_FOOD.getReason()));
     }
 }

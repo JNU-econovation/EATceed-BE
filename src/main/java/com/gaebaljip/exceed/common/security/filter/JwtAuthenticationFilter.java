@@ -4,7 +4,6 @@ import static com.gaebaljip.exceed.common.EatCeedStaticMessage.SwaggerPatterns;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -36,7 +35,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtResolver jwtResolver;
     private final MemberDetailService memberDetailService;
     private final SpringEnvironmentHelper springEnvironmentHelper;
-    private final List<String> excludeUrl = List.of("/actuator", "/v1/health");
 
     @Override
     protected void doFilterInternal(
@@ -85,18 +83,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             request.setAttribute("exception", e);
         }
         filterChain.doFilter(request, response);
-    }
-
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        String path = request.getRequestURI();
-        boolean flag = false;
-        for (String url : excludeUrl) {
-            if (path.contains(url)) {
-                flag = true;
-            }
-        }
-        return flag;
     }
 
     private boolean isSwaggerRequest(HttpServletRequest request) {

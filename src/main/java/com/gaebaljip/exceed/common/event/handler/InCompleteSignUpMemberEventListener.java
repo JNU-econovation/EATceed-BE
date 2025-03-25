@@ -28,8 +28,8 @@ public class InCompleteSignUpMemberEventListener {
 
     private Long expiredTime = 600000L;
 
-    @EventListener(classes = IncompleteSignUpEvent.class)
     @Async
+    @EventListener(classes = IncompleteSignUpEvent.class)
     public void handle(IncompleteSignUpEvent event) {
         int randomCode = createRandom();
         codePort.saveWithExpiration(event.getEmail(), String.valueOf(randomCode), expiredTime);
@@ -37,16 +37,11 @@ public class InCompleteSignUpMemberEventListener {
         context.setVariable(
                 MailTemplate.SIGN_UP_MAIL_CONTEXT, URL + MailTemplate.REPLY_TO_SIGN_UP_MAIL_URL);
         context.setVariable(MailTemplate.SIGN_UP_CODE, randomCode);
-        try {
-            emailPort.sendEmail(
-                    event.getEmail(),
-                    MailTemplate.SIGN_UP_TITLE,
-                    MailTemplate.SIGN_UP_TEMPLATE,
-                    context);
-        } catch (Exception e) {
-            log.info("msg : {}", "메일 전송에 실패했습니다.");
-            codePort.delete(event.getEmail());
-        }
+        emailPort.sendEmail(
+                event.getEmail(),
+                MailTemplate.SIGN_UP_TITLE,
+                MailTemplate.SIGN_UP_TEMPLATE,
+                context);
     }
 
     private int createRandom() {

@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.gaebaljip.exceed.adapter.in.food.request.CreateFoodRequest;
 import com.gaebaljip.exceed.common.ControllerTest;
@@ -35,7 +35,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -64,7 +64,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -93,7 +93,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -122,7 +122,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -151,7 +151,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -180,7 +180,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -209,7 +209,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -238,7 +238,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -267,7 +267,7 @@ public class CreateFoodControllerTest extends ControllerTest {
         // when
         ResultActions resultActions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/food")
+                        MockMvcRequestBuilders.post("/v1/food")
                                 .content(om.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON));
 
