@@ -54,7 +54,7 @@ public class MealFoodEntity extends BaseEntity {
                                 i ->
                                         MealFoodEntity.builder()
                                                 .unit(
-                                                        new Unit(
+                                                        Unit.createUnit(
                                                                 eatMealFoodDTOS.get(i).g(),
                                                                 eatMealFoodDTOS.get(i).multiple()))
                                                 .foodEntity(foodEntities.get(i))
@@ -66,22 +66,22 @@ public class MealFoodEntity extends BaseEntity {
 
     public double getAdjustedCalorie() {
         return this.unit
-                .getStrategy()
+                .getUnitType()
                 .measure(this.foodEntity.getCalorie(), unit, this.foodEntity.getServingSize());
     }
 
     public double getAdjustedCarbohydrate() {
-        return unit.getStrategy()
+        return unit.getUnitType()
                 .measure(this.foodEntity.getCarbohydrate(), unit, this.foodEntity.getServingSize());
     }
 
     public double getAdjustedProtein() {
-        return unit.getStrategy()
+        return unit.getUnitType()
                 .measure(this.foodEntity.getProtein(), unit, this.foodEntity.getServingSize());
     }
 
     public double getAdjustedFat() {
-        return unit.getStrategy()
+        return unit.getUnitType()
                 .measure(this.foodEntity.getFat(), unit, this.foodEntity.getServingSize());
     }
 

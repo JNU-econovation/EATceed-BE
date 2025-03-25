@@ -6,6 +6,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.gaebaljip.exceed.common.exception.meal.InvalidMultipleAndGException;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,12 +26,18 @@ public class Unit {
     @Column(name = ENTITY_PREFIX + "_MULTIPLE")
     private Double multiple;
 
-    protected MeasureStrategy getStrategy() {
-        if (this.getG() == null) {
-            return new MultipleStrategy();
-        } else {
-            return new GStrategy();
+    @Enumerated(EnumType.STRING)
+    @Column(name = ENTITY_PREFIX + "_UNIT_TYPE")
+    private UnitType unitType;
+
+    public static Unit createUnit(Integer g, Double multiple) {
+        if (Objects.nonNull(g)) {
+            return new Unit(g, multiple, UnitType.G);
         }
+        if (Objects.nonNull(multiple)) {
+            return new Unit(g, multiple, UnitType.MULTIPLE);
+        }
+        throw InvalidMultipleAndGException.EXCEPTION;
     }
 
     @Override
