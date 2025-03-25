@@ -54,7 +54,7 @@ public class MealFoodEntity extends BaseEntity {
                                 i ->
                                         MealFoodEntity.builder()
                                                 .unit(
-                                                        new Unit(
+                                                        Unit.createUnit(
                                                                 eatMealFoodDTOS.get(i).g(),
                                                                 eatMealFoodDTOS.get(i).multiple()))
                                                 .foodEntity(foodEntities.get(i))
