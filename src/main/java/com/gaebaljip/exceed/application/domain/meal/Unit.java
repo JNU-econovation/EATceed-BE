@@ -30,14 +30,6 @@ public class Unit {
     @Column(name = ENTITY_PREFIX + "_UNIT_TYPE", nullable = false)
     private UnitType unitType;
 
-    protected MeasureStrategy getStrategy() {
-        if (this.getG() == null) {
-            return new MultipleStrategy();
-        } else {
-            return new GStrategy();
-        }
-    }
-
     public static Unit createUnit(Integer g, Double multiple) {
         if (Objects.nonNull(g)) {
             return new Unit(g, multiple, UnitType.G);
