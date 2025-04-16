@@ -33,13 +33,13 @@ public class GetFoodService implements GetFoodQuery {
     @Transactional(readOnly = true)
     public GetFoodsAutoResponse execute(String prefix) {
         Set<Object> autoComplete = getAutoComplete(prefix);
-        List<String> autoCompleteList =
+        List<String> foodNames =
                 autoComplete.stream()
                         .filter(o -> checkPrefixAndPostfix(o, prefix, postfix))
                         .map(o -> (String) o)
                         .limit(10)
                         .toList();
-        return GetFoodsAutoResponse.from(autoCompleteList);
+        return GetFoodsAutoResponse.from(foodNames);
     }
 
     private GetFoodsAutoResponse executeFallback(String prefix, Exception exception) {
