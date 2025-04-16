@@ -10,7 +10,9 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
-@Table(name = FoodEntity.ENTITY_PREFIX + "_TB")
+@Table(
+        name = "FOOD_TB",
+        indexes = {@Index(name = "idx_food_name", columnList = "FOOD_NAME")})
 @Builder(toBuilder = true)
 public class FoodEntity {
 
