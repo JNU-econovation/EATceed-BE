@@ -56,4 +56,9 @@ public class FoodsPersistenceAdapter implements FoodPort {
     public void deleteById(Long foodId) {
         foodRepository.deleteById(foodId);
     }
+
+    @Override
+    public List<FoodEntity> findTop10ByPrefix(String prefix) {
+        return foodRepository.findTop10ByNameStartingWithOrderByNameAsc(prefix);
+    }
 }

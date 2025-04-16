@@ -19,4 +19,6 @@ public interface FoodRepository extends JpaRepository<FoodEntity, Long> {
     void deleteByAllByIdInQuery(List<Long> ids);
 
     List<FoodEntity> findByMemberEntity(MemberEntity memberEntity);
+
+    List<FoodEntity> findTop10ByNameStartingWithOrderByNameAsc(String prefix);
 }

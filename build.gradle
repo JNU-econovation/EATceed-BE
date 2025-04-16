@@ -26,6 +26,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// database
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -76,6 +77,9 @@ dependencies {
 
 	// Quartz
 	implementation "org.quartz-scheduler:quartz:${quartzVersion}"
+
+	// Resilience4j
+	implementation "io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}"
 }
 
 tasks.named('bootBuildImage') {
