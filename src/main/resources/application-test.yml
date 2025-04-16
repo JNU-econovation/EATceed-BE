@@ -69,3 +69,20 @@ logging:
         test.context.cache: debug
 
 app.version: 1.0.0
+
+resilience4j.circuitbreaker:
+  instances:
+    redisAutoComplete:
+      registerHealthIndicator: true
+
+      slidingWindowType: COUNT_BASED
+      slidingWindowSize: 20
+      failureRateThreshold: 50
+
+      slowCallDurationThreshold: 1000
+      slowCallRateThreshold: 50
+
+      minimumNumberOfCalls: 10
+      permittedNumberOfCallsInHalfOpenState: 5
+
+      waitDurationInOpenState: 30s
