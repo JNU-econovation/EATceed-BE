@@ -12,7 +12,7 @@ import lombok.*;
 @Entity
 @Table(
         name = "FOOD_TB",
-        indexes = {@Index(name = "idx_food_name", columnList = "FOOD_NAME")})
+        indexes = {@Index(name = "IDX_FOOD_NAME", columnList = "FOOD_NAME")})
 @Builder(toBuilder = true)
 public class FoodEntity {
 
