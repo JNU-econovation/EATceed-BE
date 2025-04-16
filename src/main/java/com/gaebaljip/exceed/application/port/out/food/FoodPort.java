@@ -25,4 +25,6 @@ public interface FoodPort {
     FoodEntity query(Long foodId);
 
     void deleteById(Long foodId);
+
+    List<FoodEntity> findTop10ByPrefix(String prefix);
 }
